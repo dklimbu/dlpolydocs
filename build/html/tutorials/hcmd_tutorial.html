@@ -1,0 +1,342 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>h-CMD Tutorial &mdash; DLPOLY Quantum 2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=60dbed4a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="IR Spectra Calculation" href="ir_tutorial.html" />
+    <link rel="prev" title="Installation" href="../install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            DLPOLY Quantum
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">h-CMD Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#step-0-reference-pimd-simulations">Step 0: Reference PIMD Simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-classical-simulations-iter0">Step 1: Classical Simulations (<code class="docutils literal notranslate"><span class="pre">iter0</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-ibi-iteration-workflow">Step 2: IBI Iteration Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-1-ibi-iteration-setup">Step 2.1: IBI Iteration Setup:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-2-running-simulations">Step 2.2: Running Simulations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-3-averaging-rdfs">Step 2.3: Averaging RDFs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-4-updating-potentials">Step 2.4: Updating Potentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-5-evaluating-convergence">Step 2.5: Evaluating Convergence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#key-files-and-their-roles">Key Files and Their Roles</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ir_tutorial.html">IR Spectra Calculation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DLPOLY Quantum</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">h-CMD Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorials/hcmd_tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="h-cmd-tutorial">
+<h1>h-CMD Tutorial<a class="headerlink" href="#h-cmd-tutorial" title="Link to this heading"></a></h1>
+<p>This tutorial provides step-by-step instructions on using Iterative Boltzmann Inversion (IBI) for <strong>h-CMD</strong> fitting in <strong>DLPOLY Quantum</strong>.</p>
+<section id="step-0-reference-pimd-simulations">
+<h2>Step 0: Reference PIMD Simulations<a class="headerlink" href="#step-0-reference-pimd-simulations" title="Link to this heading"></a></h2>
+<p>Before starting the Iterative Boltzmann Inversion (IBI) process, a <strong>Reference PIMD Simulation</strong> must be carried out
+to compute the reference intra- and inter-molecular distribution functions. These distributions serve as the benchmark that the effective potentials will aim to replicate.</p>
+<ol class="arabic simple">
+<li><p><strong>Prepare the Reference PIMD Simulation:</strong></p>
+<ul class="simple">
+<li><p>Set up the input files (CONFIG, CONTROL, FIELD) of a PIMD simulation for <strong>DLPOLY Quantum</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>Run the PIMD Simulation:</strong></p>
+<ul class="simple">
+<li><p>Execute the simulation to gather sufficient sampling of the reference system.</p></li>
+<li><p>Simulation conditions typically include:</p>
+<ul>
+<li><p>Canonical ensemble (NVT) with a quantum thermostat.</p></li>
+<li><p>Number of beads (<cite>n_beads</cite>) to achieve convergence in quantum effects.</p></li>
+<li><p>Adequate simulation time to ensure good sampling of the distributions.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Calculate Reference Distributions:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Average_Intra.d</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Average_Angle.d</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Average_RDF.d</span></code></p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-1-classical-simulations-iter0">
+<h2>Step 1: Classical Simulations (<code class="docutils literal notranslate"><span class="pre">iter0</span></code>)<a class="headerlink" href="#step-1-classical-simulations-iter0" title="Link to this heading"></a></h2>
+<p>After obtaining the reference distributions, an initial iteration, referred to as <strong>Iteration 0</strong>, (<code class="docutils literal notranslate"><span class="pre">iter0</span></code>) is performed under the following conditions:</p>
+<ul class="simple">
+<li><p>The correction potentials, <span class="math notranslate nohighlight">\(\Delta V_{\text{intra}}^{(0)}(r)\)</span> and <span class="math notranslate nohighlight">\(\Delta V_{\text{inter}}^{(0)}(r)\)</span>, are all set to <strong>zero</strong>.</p></li>
+<li><p>The system evolves using the classical potential, <span class="math notranslate nohighlight">\((V_{\text{cl}}(r))\)</span>.</p></li>
+</ul>
+<p>This step simulates classical dynamics without correction, providing a baseline, which serve as the starting point for subsequent iterations in the IBI process.</p>
+</section>
+<section id="step-2-ibi-iteration-workflow">
+<h2>Step 2: IBI Iteration Workflow<a class="headerlink" href="#step-2-ibi-iteration-workflow" title="Link to this heading"></a></h2>
+<p>Iterative Boltzmann Inversion (IBI) is used to refine effective interaction potentials by matching intra- and inter-molecular distribution fuctions.</p>
+<section id="step-2-1-ibi-iteration-setup">
+<h3>Step 2.1: IBI Iteration Setup:<a class="headerlink" href="#step-2-1-ibi-iteration-setup" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Prepare the <code class="docutils literal notranslate"><span class="pre">iter-setup.sh</span></code> script to automate iteration setup: Each iteration runs 50 NVT simulations with 50 ps of equilibration and 50 ps of RDF gathering.</p></li>
+<li><p>Edit the simulation parameters in the <code class="docutils literal notranslate"><span class="pre">iterCONTROL</span></code> file. Example settings include temperature, time steps, and RDF parameters.</p></li>
+<li><p>Update the <code class="docutils literal notranslate"><span class="pre">iteration</span> <span class="pre">number</span></code> in the <code class="docutils literal notranslate"><span class="pre">iter-setup.sh</span></code> script:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">i=&lt;current_iteration_number&gt;</span>
+</pre></div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">iter-setup.sh</span></code></span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">let</span><span class="w"> </span><span class="nv">i</span><span class="o">=</span><span class="m">1</span>
+<span class="nb">let</span><span class="w"> </span><span class="nv">j</span><span class="o">=</span>i-1
+<span class="nb">let</span><span class="w"> </span><span class="nv">ntraj</span><span class="o">=</span><span class="m">50</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span>iter<span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>iter<span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="w"> </span>exists,<span class="w"> </span>change<span class="w"> </span>iteration<span class="w"> </span>number<span class="w"> </span>at<span class="w"> </span>first!!
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">elif</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>!<span class="w"> </span>-d<span class="w"> </span>iter<span class="si">${</span><span class="nv">j</span><span class="si">}</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>iter<span class="si">${</span><span class="nv">j</span><span class="si">}</span><span class="w"> </span>does<span class="w"> </span>not<span class="w"> </span>exist,<span class="w"> </span>change<span class="w"> </span>iteration<span class="w"> </span>number<span class="w"> </span>at<span class="w"> </span>first!!
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;running simulation for iter</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;copying necessary files from iter</span><span class="si">${</span><span class="nv">j</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+mkdir<span class="w"> </span>iter<span class="si">${</span><span class="nv">i</span><span class="si">}</span>
+mkdir<span class="w"> </span>iter<span class="si">${</span><span class="nv">i</span><span class="si">}</span>/run
+cp<span class="w"> </span>base_scripts/run_dlpoly.sh<span class="w"> </span>iter<span class="si">${</span><span class="nv">i</span><span class="si">}</span>/run/
+cp<span class="w"> </span>base_scripts/run_avg.sh<span class="w"> </span>iter<span class="si">${</span><span class="nv">i</span><span class="si">}</span>/run/
+cp<span class="w"> </span>base_scripts/run_IBI.sh<span class="w"> </span>iter<span class="si">${</span><span class="nv">i</span><span class="si">}</span>/
+<span class="nb">cd</span><span class="w"> </span>iter<span class="si">${</span><span class="nv">i</span><span class="si">}</span>/run
+mkdir<span class="w"> </span>base_input
+cp<span class="w"> </span>../../FQCMD<span class="w"> </span>base_input/
+cp<span class="w"> </span>../../iterCONTROL<span class="w"> </span>base_input/CONTROL
+cp<span class="w"> </span>../../avgCONTROL<span class="w"> </span>CONTROL
+cp<span class="w"> </span>../../iter<span class="si">${</span><span class="nv">j</span><span class="si">}</span>/*.table<span class="w"> </span>base_input/<span class="w"> </span>
+cp<span class="w"> </span>../../iter<span class="si">${</span><span class="nv">j</span><span class="si">}</span>/new_FIELD<span class="w"> </span>base_input/FIELD
+cp<span class="w"> </span>../../iter<span class="si">${</span><span class="nv">j</span><span class="si">}</span>/new_FIELD<span class="w"> </span>../old_FIELD
+cp<span class="w"> </span>../../iter<span class="si">${</span><span class="nv">j</span><span class="si">}</span>/New_Potential.dat<span class="w"> </span>../Previous_Potential.dat
+
+<span class="k">for</span><span class="w"> </span>k<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;%03g&quot;</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="si">${</span><span class="nv">ntraj</span><span class="si">}</span><span class="k">)</span>
+<span class="k">do</span>
+<span class="w">   </span>mkdir<span class="w"> </span>traj<span class="si">${</span><span class="nv">k</span><span class="si">}</span>
+<span class="w">   </span>cp<span class="w"> </span>base_input/*<span class="w"> </span>traj<span class="si">${</span><span class="nv">k</span><span class="si">}</span>/
+<span class="w">   </span>cp<span class="w"> </span>run_dlpoly.sh<span class="w"> </span>traj<span class="si">${</span><span class="nv">k</span><span class="si">}</span>/
+<span class="w">   </span>cp<span class="w"> </span>../../ref/run/traj<span class="si">${</span><span class="nv">k</span><span class="si">}</span>/CONFIG<span class="w"> </span>traj<span class="si">${</span><span class="nv">k</span><span class="si">}</span>/<span class="w"> </span>
+<span class="w">   </span><span class="nb">cd</span><span class="w"> </span>traj<span class="si">${</span><span class="nv">k</span><span class="si">}</span>
+<span class="w">      </span>sbatch<span class="w"> </span>-J<span class="w"> </span>itr<span class="si">${</span><span class="nv">i</span><span class="si">}</span>-<span class="si">${</span><span class="nv">k</span><span class="si">}</span><span class="w"> </span>run_dlpoly.sh
+<span class="w">   </span><span class="nb">cd</span><span class="w"> </span>../
+<span class="k">done</span>
+<span class="nb">cd</span><span class="w"> </span>../..
+</pre></div>
+</div>
+</div>
+</li>
+</ol>
+</section>
+<section id="step-2-2-running-simulations">
+<h3>Step 2.2: Running Simulations<a class="headerlink" href="#step-2-2-running-simulations" title="Link to this heading"></a></h3>
+<p>Execute the <code class="docutils literal notranslate"><span class="pre">iter-setup.sh</span></code> script:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>bash<span class="w"> </span>iter-setup.sh
+</pre></div>
+</div>
+</div></blockquote>
+<p>This will start  50 classical-like dynamics under the correction potentials and generate RDFs for each trajectory. The <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> file looks like:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fqcmd<span class="w">  </span><span class="nv">pot</span><span class="o">=</span><span class="m">15</span><span class="w">  </span><span class="nv">points</span><span class="o">=</span><span class="m">998</span><span class="w">  </span><span class="nv">outpts</span><span class="o">=</span><span class="m">480</span><span class="w">  </span><span class="nv">bnd</span><span class="o">=</span><span class="m">5</span><span class="w">  </span><span class="nv">ang</span><span class="o">=</span><span class="m">8</span><span class="w">  </span><span class="nv">wrt</span><span class="o">=</span><span class="m">100</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="step-2-3-averaging-rdfs">
+<h3>Step 2.3: Averaging RDFs<a class="headerlink" href="#step-2-3-averaging-rdfs" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Navigate to the simulation directory after the completion of simulation where the RDFs are stored:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>iter&lt;current_iteration_number&gt;/run
+</pre></div>
+</div>
+</li>
+<li><p>Use the <strong>rdfAvg</strong> program (provided in utility folder) to compute the average RDFs from all trajectories:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>rdfAvg
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you change the number of trajecties or RDF points, update the <code class="docutils literal notranslate"><span class="pre">avgCONTROL</span></code> file to reflect these changes.</p>
+</div>
+</li>
+</ol>
+</section>
+<section id="step-2-4-updating-potentials">
+<h3>Step 2.4: Updating Potentials<a class="headerlink" href="#step-2-4-updating-potentials" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Return to the iteration directory; Move up one directory to the main iteration forder:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>..
+</pre></div>
+</div>
+</li>
+<li><p>Ensure the following required files exist.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">old_FIELD</span></code> (<em>FIELD file from the previous iteration</em>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Previous_Potential.dat</span></code> (<em>potential corrections from the previous iteration</em>)</p></li>
+</ul>
+</li>
+<li><p>Run the IBI Python script to generate updated potentials:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python<span class="w"> </span>IBI.py
+</pre></div>
+</div>
+<p>The script generates the updated potential corrections:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">new_FIELD</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">New_Potential.dat</span></code></p></li>
+<li><p>A series of <code class="docutils literal notranslate"><span class="pre">*.table</span></code> files</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-2-5-evaluating-convergence">
+<h3>Step 2.5: Evaluating Convergence<a class="headerlink" href="#step-2-5-evaluating-convergence" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Compare the RDFs of the reference and the currect iteration.</p></li>
+<li><p>If the RDFs do not match, repeat the process by starting a new iteration by updating the <code class="docutils literal notranslate"><span class="pre">iteration</span> <span class="pre">number</span></code> in <code class="docutils literal notranslate"><span class="pre">iter-setup.sh</span></code> and rerun the steps above.</p></li>
+</ul>
+</section>
+</section>
+<section id="key-files-and-their-roles">
+<h2>Key Files and Their Roles<a class="headerlink" href="#key-files-and-their-roles" title="Link to this heading"></a></h2>
+<p>This table describes the key files used during the IBI process and their roles.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>File Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">iter-setup.sh</span></code></p></td>
+<td><p>Bash script to automate simulation setup and execution for the current iteration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">iterCONTROL</span></code></p></td>
+<td><p>Configuration file for controlling simulation parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">avgCONTROL</span></code></p></td>
+<td><p>Configuration file for averaging RDFs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">old_FIELD</span></code></p></td>
+<td><p>Field file from the previous iteration.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">new_FIELD</span></code></p></td>
+<td><p>Updated field file generated by the IBI script.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Previous_Potential.dat</span></code></p></td>
+<td><p>Potential corrections from the previous iteration.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">New_Potential.dat</span></code></p></td>
+<td><p>Updated potential corrections.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">*.table</span></code></p></td>
+<td><p>Individual tables representing updated potentials for specific interactions.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ir_tutorial.html" class="btn btn-neutral float-right" title="IR Spectra Calculation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, DLPOLY Quantum Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

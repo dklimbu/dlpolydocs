@@ -1,0 +1,199 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; DLPOLY Quantum 2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+    <link rel="shortcut icon" href="_static/logo.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=60dbed4a"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="install.html" />
+    <link rel="prev" title="DLPOLY Quantum documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DLPOLY Quantum
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pimd">1. PIMD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rpmd">2. RPMD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#t-rpmd">3. T-RPMD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pa-cmd">4. PA-CMD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#f-cmd">5. f-CMD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#f-qcmd">6. f-QCMD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#h-cmd">7. h-CMD</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/hcmd_tutorial.html">h-CMD Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/ir_tutorial.html">IR Spectra Calculation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DLPOLY Quantum</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/intro.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
+<p id="intro"><strong>DLPOLY Quantum</strong> is a general purpose package for performing path integral-based dynamics simultions of condensed-phase systems.</p>
+<section id="pimd">
+<h2>1. PIMD<a class="headerlink" href="#pimd" title="Link to this heading"></a></h2>
+<p>The PIMD Hamiltonian for <cite>n-beads</cite> replica with <cite>N</cite> atoms system is defined as</p>
+<div class="math notranslate nohighlight">
+\[H_n(\mathbf{x},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n} \left[ \frac{p_{i,\alpha}^2}{2m_i^{'}} +
+     \frac{1}{2}m_i\omega_n^2 \left( x_{i,\alpha}-x_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(x_{1,\alpha},\dots,x_{N,\alpha}),\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_{i,\alpha}\)</span> and <span class="math notranslate nohighlight">\(p_{i,\alpha}\)</span> are the position and momentum of the <span class="math notranslate nohighlight">\(\alpha\)</span>-th bead of the <cite>i</cite>-th particle, <span class="math notranslate nohighlight">\(m_i^{'}\)</span> is the fictitious Parrinello-Rahman mass, and <span class="math notranslate nohighlight">\(\omega_n= \frac{\sqrt{n}}{\beta\hbar}\)</span>.</p>
+<p>The equations of motion (EOMs) derived from the PIMD Hamiltonian are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\dot{p}_{i,\alpha} &amp;= -m_i \omega_n^2 (2x_{i,\alpha} - x_{i,\alpha-1} - x_{i,\alpha+1}) + \frac{1}{n} \nabla_{x_{i,\alpha}}V( \mathbf{x} ) \\
+\dot{x}_{i,\alpha} &amp;= \frac{p_{i,\alpha}}{m_i^{'}}.\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To ensure that the configurations sampled during the trajectories are part of the correct Boltzmann distribution, PIMD simulations are performed in the canonical ensemble by coupling the dynamics to a thermostat.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Straightforward implementation of the PIMD Hamiltonian and its EOMs in Cartesian coordinates is complicated by the harmonic coupling between neighboring beads. Most implementations of the method transform the Hamiltonian into a different coordinate system which diagonalizes the couplings, like staging variables or normal mode coordinate.</p>
+</div>
+<p>PIMD Hamiltonian in normal modes is</p>
+<div class="math notranslate nohighlight">
+\[H_{\mathrm{NM}} = \sum_{i=1}^N\sum_{k=0}^{n-1}\left[ \frac{\pi_{i,k}^2}{2m_{i}} + \frac{1}{2}m_{i} \omega_k^2 q_{i,k}^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(x_{1,\alpha}(\mathbf{q}),\dots,x_{N,\alpha}(\mathbf{q}))\]</div>
+<p>where <span class="math notranslate nohighlight">\(\omega_k = 2\omega_n\sin(k\pi/n)\)</span> are normal mode frequencies and <span class="math notranslate nohighlight">\(q_{i,k}\)</span> and <span class="math notranslate nohighlight">\(\pi_{i,k}\)</span> are the positions and momenta for the <cite>k</cite>-th normal mode of the <cite>i</cite>-th atom.</p>
+</section>
+<section id="rpmd">
+<h2>2. RPMD<a class="headerlink" href="#rpmd" title="Link to this heading"></a></h2>
+<p>The RPMD Hamiltonian is</p>
+<div class="math notranslate nohighlight">
+\[H_n(\mathbf{x},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n}\left[ \frac{p_{i,\alpha}^2}{2m^{(i)}_{n}} + \frac{1}{2}m^{(i)}_{n}\omega_n^2 \left( x_{i,\alpha}-x_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(x_{1,\alpha},\dots,x_{N,\alpha}),\]</div>
+<p>with <span class="math notranslate nohighlight">\(m_n^{(i)}=\frac{m_i}{n}\)</span> and <span class="math notranslate nohighlight">\(\omega_n= \frac{n}{\beta\hbar}\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The fictitious mass in the kinetic energy term must be equal to the physical mass, with the additional factor of <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span> multiplying the physical mass coming from sampling the initial momenta at the physical temperature, <span class="math notranslate nohighlight">\(\beta\)</span>, instead of a higher temperature, <span class="math notranslate nohighlight">\(\beta_n= \frac{\beta}{n}\)</span>, as is often done in RPMD simulations.</p>
+</div>
+</section>
+<section id="t-rpmd">
+<h2>3. T-RPMD<a class="headerlink" href="#t-rpmd" title="Link to this heading"></a></h2>
+<p>The T-RPMD Hamiltonian is</p>
+<div class="math notranslate nohighlight">
+\[H_n(\mathbf{x},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n}\left[ \frac{p_{i,\alpha}^2}{2m^{(i)}_{n}} + \frac{1}{2}m^{(i)}_{n}\omega_n^2 \left( x_{i,\alpha}-x_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(x_{1,\alpha},\dots,x_{N,\alpha}),\]</div>
+<p>with <span class="math notranslate nohighlight">\(m_n^{(i)}=\frac{m_i}{n}\)</span> and <span class="math notranslate nohighlight">\(\omega_n= \frac{n}{\beta\hbar}\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The T-RPMD can be considered as an intermediate method between RPMD and CMD which <code class="docutils literal notranslate"><span class="pre">couples</span> <span class="pre">the</span> <span class="pre">internal</span> <span class="pre">modes</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">RP</span> <span class="pre">to</span> <span class="pre">a</span> <span class="pre">thermostat</span> <span class="pre">without</span> <span class="pre">altering</span> <span class="pre">their</span> <span class="pre">masses</span></code>. This helps to remove the spurious frequencies from standard RPMD without the curvature problem of CMD. The T-RPMD Hamiltonian is the same as that for standard RPMD where the internal modes are coupled to the PILE thermostat while the centroid is not thermostatted.</p>
+</div>
+</section>
+<section id="pa-cmd">
+<h2>4. PA-CMD<a class="headerlink" href="#pa-cmd" title="Link to this heading"></a></h2>
+<p>The PA-CMD effective Hamiltonian in terms of the free ring polymer normal modes is:</p>
+<div class="math notranslate nohighlight">
+\[ H_{\mathrm{PA-CMD}}^0=\sum_{i=1}^{N}\sum_{k=0}^{n-1}
+\left[ \frac{\tilde{p}_{i,k}^2}{2\sigma_k^2m_n^{(i)}} + \frac{1}{2}m_n^{(i)}\omega_k^2\tilde{q}_{i,k}^2\right]\]</div>
+<p>where, <span class="math notranslate nohighlight">\(\sigma_k\)</span> is a scaling factor defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\sigma_k =\begin{cases}
+1, \quad k=0 \\
+\omega_k/\Omega, \quad k\neq0
+\end{cases}\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The choice of <span class="math notranslate nohighlight">\(\Omega\)</span>, related to the adiabaticity parameter of the original PA-CMD, determines how adiabatically separated the centroid is from the other internal modes. One such choice is <span class="math notranslate nohighlight">\(\Omega = \frac{n^{n/(n-1)}}{\beta\hbar}\)</span></p>
+</div>
+</section>
+<section id="f-cmd">
+<h2>5. f-CMD<a class="headerlink" href="#f-cmd" title="Link to this heading"></a></h2>
+</section>
+<section id="f-qcmd">
+<h2>6. f-QCMD<a class="headerlink" href="#f-qcmd" title="Link to this heading"></a></h2>
+</section>
+<section id="h-cmd">
+<h2>7. h-CMD<a class="headerlink" href="#h-cmd" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="DLPOLY Quantum documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, DLPOLY Quantum Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
