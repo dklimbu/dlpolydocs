@@ -35,6 +35,53 @@ PIMD Hamiltonian in normal modes is
 
 where :math:`\omega_k = 2\omega_n\sin(k\pi/n)` are normal mode frequencies and :math:`q_{i,k}` and :math:`\pi_{i,k}` are the positions and momenta for the `k`-th normal mode of the `i`-th atom.
 
+.. note::
+   The transformation matrix for ring polymer normal modes are:
+
+   .. math::
+      C_{\alpha k} = 
+	\begin{cases}
+	\sqrt{1/n} & k = 0\\
+	\sqrt{2/n}\cos(2\pi \alpha k/n) & 1 \leq k \leq n/2 - 1\\
+	\sqrt{1/n}(-1)^\alpha & k = n/2 \\
+	\sqrt{2/n}\sin(2\pi \alpha k/n) & n/2 + 1 \leq k \leq n-1 
+	\end{cases}
+
+**The Velocity-Verlet algorith steps for ring polymer normal mode:**
+
+- The normal mode momenta at first half a time step:
+
+.. math::
+   \pi_{i,k}(t+\frac{\Delta t}{2}) = \pi_{i,k}(t) - \frac{\Delta t}{2}\frac{\partial U}{\partial q_{i,k}}
+
+- The free ring polymer evolution of the normal mode positions and momenta:
+
+.. math::
+   &\begin{pmatrix}
+	\pi_{i,k}(t+\Delta t) \\
+	q_{i,k}(t+\Delta t)
+   \end{pmatrix} = 
+   &\begin{pmatrix}
+	\cos(\omega_k\Delta t) & -{m_i}\omega_k\sin(\omega_k\Delta t) \\
+	(m_i\omega_k)^{-1}\sin(\omega_k\Delta t) & \cos(\omega_k\Delta t)
+   \end{pmatrix}
+   \begin{pmatrix}
+	\pi_{i,k}(t) \\
+	q_{i,k}(t)
+   \end{pmatrix}.
+
+- The normal mode momenta at second half a time step:
+
+.. math::
+   \pi_{i,k}(t+\frac{\Delta t}{2}) = \pi_{i,k}(t) - \frac{\Delta t}{2}\frac{\partial U}{\partial q_{i,k}}
+
+.. note::
+   In between **free ring polymer** and **second half time step  mementa** calculation , the forces from the external potential are calculated based on the **Cartesian positions** and then converted into the normal mode basis, to reduce the overall number of transformations needed to be performed. 
+
+   .. math::
+      \frac{\partial U}{\partial q_{i,k}} = \sum_{\alpha=1}^n C_{\alpha k}\frac{\partial U}{\partial x_{i,\alpha}}.
+
+
 2. RPMD
 -------
 

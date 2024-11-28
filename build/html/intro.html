@@ -114,6 +114,51 @@
 <div class="math notranslate nohighlight">
 \[H_{\mathrm{NM}} = \sum_{i=1}^N\sum_{k=0}^{n-1}\left[ \frac{\pi_{i,k}^2}{2m_{i}} + \frac{1}{2}m_{i} \omega_k^2 q_{i,k}^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(x_{1,\alpha}(\mathbf{q}),\dots,x_{N,\alpha}(\mathbf{q}))\]</div>
 <p>where <span class="math notranslate nohighlight">\(\omega_k = 2\omega_n\sin(k\pi/n)\)</span> are normal mode frequencies and <span class="math notranslate nohighlight">\(q_{i,k}\)</span> and <span class="math notranslate nohighlight">\(\pi_{i,k}\)</span> are the positions and momenta for the <cite>k</cite>-th normal mode of the <cite>i</cite>-th atom.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The transformation matrix for ring polymer normal modes are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}C_{\alpha k} =
+  \begin{cases}
+  \sqrt{1/n} &amp; k = 0\\
+  \sqrt{2/n}\cos(2\pi \alpha k/n) &amp; 1 \leq k \leq n/2 - 1\\
+  \sqrt{1/n}(-1)^\alpha &amp; k = n/2 \\
+  \sqrt{2/n}\sin(2\pi \alpha k/n) &amp; n/2 + 1 \leq k \leq n-1
+  \end{cases}\end{split}\]</div>
+</div>
+<p><strong>The Velocity-Verlet algorith steps for ring polymer normal mode:</strong></p>
+<ul class="simple">
+<li><p>The normal mode momenta at first half a time step:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\pi_{i,k}(t+\frac{\Delta t}{2}) = \pi_{i,k}(t) - \frac{\Delta t}{2}\frac{\partial U}{\partial q_{i,k}}\]</div>
+<ul class="simple">
+<li><p>The free ring polymer evolution of the normal mode positions and momenta:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp;\begin{pmatrix}
+     \pi_{i,k}(t+\Delta t) \\
+     q_{i,k}(t+\Delta t)
+\end{pmatrix} =
+&amp;\begin{pmatrix}
+     \cos(\omega_k\Delta t) &amp; -{m_i}\omega_k\sin(\omega_k\Delta t) \\
+     (m_i\omega_k)^{-1}\sin(\omega_k\Delta t) &amp; \cos(\omega_k\Delta t)
+\end{pmatrix}
+\begin{pmatrix}
+     \pi_{i,k}(t) \\
+     q_{i,k}(t)
+\end{pmatrix}.\end{split}\]</div>
+<ul class="simple">
+<li><p>The normal mode momenta at second half a time step:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\pi_{i,k}(t+\frac{\Delta t}{2}) = \pi_{i,k}(t) - \frac{\Delta t}{2}\frac{\partial U}{\partial q_{i,k}}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In between <strong>free ring polymer</strong> and <strong>second half time step  mementa</strong> calculation , the forces from the external potential are calculated based on the <strong>Cartesian positions</strong> and then converted into the normal mode basis, to reduce the overall number of transformations needed to be performed.</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial U}{\partial q_{i,k}} = \sum_{\alpha=1}^n C_{\alpha k}\frac{\partial U}{\partial x_{i,\alpha}}.\]</div>
+</div>
 </section>
 <section id="rpmd">
 <h2>2. RPMD<a class="headerlink" href="#rpmd" title="Link to this heading"></a></h2>
