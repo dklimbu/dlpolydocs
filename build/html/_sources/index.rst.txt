@@ -16,9 +16,6 @@ Welcome to **DLPOLY Quantum** documentation, a general purpose package for perfo
 
 Check out the :doc:`install` section for further information, including how to :ref:`install <installation>` the project. Goto :doc:`tutorials/hcmd_tutorial` section for detailed simulation tutorials on h-CMD.
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
 
 .. toctree::
    :maxdepth: 2
