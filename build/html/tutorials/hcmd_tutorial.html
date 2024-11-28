@@ -17,7 +17,6 @@
       <script src="../_static/documentation_options.js?v=60dbed4a"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -52,14 +51,21 @@
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">h-CMD Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#step-0-reference-pimd-simulations">Step 0: Reference PIMD Simulations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-1-classical-simulations-iter0">Step 1: Classical Simulations (<code class="docutils literal notranslate"><span class="pre">iter0</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-2-ibi-iteration-workflow">Step 2: IBI Iteration Workflow</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#step-2-1-ibi-iteration-setup">Step 2.1: IBI Iteration Setup:</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step-2-2-running-simulations">Step 2.2: Running Simulations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step-2-3-averaging-rdfs">Step 2.3: Averaging RDFs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step-2-4-updating-potentials">Step 2.4: Updating Potentials</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step-2-5-evaluating-convergence">Step 2.5: Evaluating Convergence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-setup-h-cmd">Step 1: Setup h-CMD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#h-cmd-specification">1.1 h-CMD Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fqcmd-keyword-options-in-control-file">1.2 FQCMD Keyword Options in <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output-files">1.3 Output Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fqcmd-file">1.4 FQCMD File</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-pimd-reference-simulation">Step 2: PIMD Reference Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-classical-simulations-iter0">Step 3: Classical Simulations (<code class="docutils literal notranslate"><span class="pre">iter0</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-4-ibi-iteration-workflow">Step 4: IBI Iteration Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-1-ibi-iteration-setup">Step 4.1: IBI Iteration Setup:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-2-running-simulations">Step 4.2: Running Simulations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-3-averaging-rdfs">Step 4.3: Averaging RDFs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-4-updating-potentials">Step 4.4: Updating Potentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-5-evaluating-convergence">Step 4.5: Evaluating Convergence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#key-files-and-their-roles">Key Files and Their Roles</a></li>
@@ -95,51 +101,291 @@
   <section id="h-cmd-tutorial">
 <h1>h-CMD Tutorial<a class="headerlink" href="#h-cmd-tutorial" title="Link to this heading"></a></h1>
 <p>This tutorial provides step-by-step instructions on using Iterative Boltzmann Inversion (IBI) for <strong>h-CMD</strong> fitting in <strong>DLPOLY Quantum</strong>.</p>
-<section id="step-0-reference-pimd-simulations">
-<h2>Step 0: Reference PIMD Simulations<a class="headerlink" href="#step-0-reference-pimd-simulations" title="Link to this heading"></a></h2>
-<p>Before starting the Iterative Boltzmann Inversion (IBI) process, a <strong>Reference PIMD Simulation</strong> must be carried out
-to compute the reference intra- and inter-molecular distribution functions. These distributions serve as the benchmark that the effective potentials will aim to replicate.</p>
-<ol class="arabic simple">
-<li><p><strong>Prepare the Reference PIMD Simulation:</strong></p>
+<section id="step-1-setup-h-cmd">
+<h2>Step 1: Setup h-CMD<a class="headerlink" href="#step-1-setup-h-cmd" title="Link to this heading"></a></h2>
+<p>To perform h-CMD simulations, additional keywords are added to the <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> file. This <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> file is used for performing the initial PIMD reference calculations, where the keyword <code class="docutils literal notranslate"><span class="pre">pimd</span></code> indicates the integrator to be used.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">CONTROL</span></code></span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>h-CMD<span class="w"> </span>simulation<span class="w"> </span>of<span class="w"> </span>LiTFSI<span class="w"> </span>+<span class="w"> </span>q-TIP4P/F<span class="w"> </span>WATER
+
+pimd<span class="w"> </span>pile<span class="w"> </span><span class="nv">nbeads</span><span class="o">=</span><span class="m">32</span><span class="w"> </span><span class="nv">taut</span><span class="o">=</span><span class="m">0</span>.05
+
+<span class="c1"># integration velocity verlet</span>
+<span class="c1"># ensemble nvt nhc 0.05 1 3</span>
+
+<span class="c1"># invoking qTIP4P/f water potential model</span>
+qtip4pf
+
+<span class="c1"># SYSTEM TARGETED TEMPERATURE (K) </span>
+temperature<span class="w">  </span><span class="m">298</span>.0
+
+<span class="c1"># INTEGRATION TIMESTEP (ps)</span>
+timestep<span class="w"> </span><span class="m">0</span>.0002
+
+<span class="c1"># SIMULATION &amp; EQUILIBRATION LENGTH</span>
+equil<span class="w">	       </span><span class="m">250000</span>
+steps<span class="w">          </span><span class="m">500000</span>
+trajectory<span class="w">     </span><span class="m">251000</span><span class="w"> </span><span class="m">500</span><span class="w"> </span><span class="m">1</span>
+
+<span class="c1"># OUTPUT</span>
+print<span class="w">          </span><span class="m">5000</span>
+
+<span class="c1"># h-CMD Options</span>
+fqcmd<span class="w"> </span><span class="nv">pot</span><span class="o">=</span><span class="m">15</span><span class="w"> </span><span class="nv">points</span><span class="o">=</span><span class="m">850</span><span class="w"> </span><span class="nv">outpts</span><span class="o">=</span><span class="m">480</span><span class="w"> </span><span class="nv">bnd</span><span class="o">=</span><span class="m">5</span><span class="w"> </span><span class="nv">rmax</span><span class="o">=</span><span class="m">2</span>.5<span class="w"> </span><span class="nv">ang</span><span class="o">=</span><span class="m">8</span><span class="w"> </span><span class="nv">wrt</span><span class="o">=</span><span class="m">100</span>
+
+<span class="c1"># STATISTICS</span>
+stats<span class="w">          </span><span class="m">100</span>
+
+<span class="c1"># SYSTEM CUTOFFS FOR ELECTROSTATICS AND NON-BONDED</span>
+cutoff<span class="w">         </span><span class="m">8</span>.5
+rvdw<span class="w">           </span><span class="m">8</span>.5
+ewald<span class="w"> </span>precision<span class="w">   </span><span class="m">1</span>.0e-6
+delr<span class="w"> </span>width<span class="w">      </span><span class="m">0</span>.5<span class="w">	</span>!<span class="w"> </span><span class="k">for</span><span class="w"> </span>Verlet<span class="w"> </span>list
+
+<span class="c1"># EXECUTION TIME</span>
+job<span class="w"> </span><span class="nb">time</span><span class="w">       </span><span class="m">9999999</span>.0
+close<span class="w"> </span><span class="nb">time</span><span class="w">     </span><span class="m">20</span>.0
+
+finish
+</pre></div>
+</div>
+</div>
+<section id="h-cmd-specification">
+<h3>1.1 h-CMD Specification<a class="headerlink" href="#h-cmd-specification" title="Link to this heading"></a></h3>
+<p>The simulation is specified as part of an h-CMD simulation using the <code class="docutils literal notranslate"><span class="pre">fqcmd</span></code> keyword. When this keyword is added for systems with multiple molecule types (as defined in the <code class="docutils literal notranslate"><span class="pre">FIELD</span></code> file), DL POLY Quantum automatically treats the simulation as h-CMD.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In <strong>Version 2.1</strong>, the software assumes the final molecule type (typically water) is treated at the f-QCMD level, while other molecule types are treated at the f-CMD level.</p>
+</div>
+</section>
+<section id="fqcmd-keyword-options-in-control-file">
+<h3>1.2 FQCMD Keyword Options in <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> File<a class="headerlink" href="#fqcmd-keyword-options-in-control-file" title="Link to this heading"></a></h3>
+<p>The options following the <code class="docutils literal notranslate"><span class="pre">fqcmd</span></code> keyword determine how the h-CMD simulation works:</p>
 <ul class="simple">
-<li><p>Set up the input files (CONFIG, CONTROL, FIELD) of a PIMD simulation for <strong>DLPOLY Quantum</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pot</span></code> <strong>Option</strong>: Specifies the number of non-bonded pair interactions using a correction potential.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">points</span></code> <strong>Option</strong>: Specifies the number of grid points in the <code class="docutils literal notranslate"><span class="pre">TABLE</span></code> files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bnd</span></code> <strong>Option</strong>: Specifies the total number of unique bonds.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rmax</span></code> <strong>Option</strong>: Defines the maximum value for the bond distribution function.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ang</span></code> <strong>Option</strong>: Specifies the total number of unique angles.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wrt</span></code> <strong>Option</strong>: Defines the number of timesteps between distribution function calculations.</p></li>
 </ul>
-</li>
-<li><p><strong>Run the PIMD Simulation:</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each non-bonded pair has an associated <code class="docutils literal notranslate"><span class="pre">TABLE</span></code> file named <code class="docutils literal notranslate"><span class="pre">PAIR_&lt;i&gt;_POT.TABLE</span></code>.
+The first line of the table contains the atom names as defined in the <code class="docutils literal notranslate"><span class="pre">FIELD</span></code> file.
+During PIMD reference simulations, potential and force values in the table are ignored; however, pair names are used to calculate RDFs.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <ul class="simple">
+<li><p>The maximum value for angle distribution is set to π.</p></li>
+<li><p>The maximum for RDFs is the non-bonded cutoff value in the <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> file.</p></li>
+</ul>
+</div>
+</section>
+<section id="output-files">
+<h3>1.3 Output Files<a class="headerlink" href="#output-files" title="Link to this heading"></a></h3>
+<p>h-CMD simulations generate three additional output files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AVERAGE_INTRA.D</span></code>: Includes intramolecular bond distributions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AVERAGE_ANGLE.D</span></code>: Includes intramolecular angle distributions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AVERAGE_RDF.D</span></code>: Includes the RDFs for the system.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The number of points in these output files is defined by the <code class="docutils literal notranslate"><span class="pre">outpts</span></code> option in the <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> file.</p>
+</div>
+</section>
+<section id="fqcmd-file">
+<h3>1.4 FQCMD File<a class="headerlink" href="#fqcmd-file" title="Link to this heading"></a></h3>
+<p>An additional input file, the <code class="docutils literal notranslate"><span class="pre">FQCMD</span></code> file, is required for h-CMD simulations.
+For the Li-TFSI system, an example is shown here.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">FQCMD</span></code></span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">FQCMD params</span>
+<span class="go">TFSI</span>
+<span class="go">bonds 4</span>
+<span class="go">  harm 4</span>
+<span class="go">  harm 6</span>
+<span class="go">  harm 2</span>
+<span class="go">  harm 2</span>
+<span class="go">angles 7</span>
+<span class="go">  harm 4</span>
+<span class="go">  harm 2</span>
+<span class="go">  harm 4</span>
+<span class="go">  harm 6</span>
+<span class="go">  harm 6</span>
+<span class="go">  harm 2</span>
+<span class="go">  harm 1</span>
+<span class="go">finish</span>
+<span class="go">Li-ion</span>
+<span class="go">bonds 0</span>
+<span class="go">angles 0</span>
+<span class="go">finish</span>
+<span class="go">H2O</span>
+<span class="go">bonds 1</span>
+<span class="go">  quar 2</span>
+<span class="go">angles 1</span>
+<span class="go">  harm 1</span>
+<span class="go">finish</span>
+<span class="go">CLOSE</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p><strong>FQCMD</strong> file includes details about the <code class="docutils literal notranslate"><span class="pre">bonds</span></code> and <code class="docutils literal notranslate"><span class="pre">angles</span></code> for each molecule type in the same order as in the <code class="docutils literal notranslate"><span class="pre">FIELD</span></code> file:</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bonds</span></code> <strong>option</strong> specifies the number of unique bond types for a molecule and their occurrences.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">angles</span></code> <strong>option</strong> specifies the number of unique angle types and their occurrences.</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="step-2-pimd-reference-simulation">
+<h2>Step 2: PIMD Reference Simulation<a class="headerlink" href="#step-2-pimd-reference-simulation" title="Link to this heading"></a></h2>
+<p>For h-CMD simulation, at first, a <strong>Reference PIMD Simulation</strong> must be carried out to compute the reference intra- and inter-molecular distribution functions. These distributions serve as the benchmark that the effective potentials will aim to replicate.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is often advantageous to perform multiple PIMD reference simulations starting from different initial configurations. This approach improves the statistical accuracy of the calculated distribution functions.</p>
+</div>
+<dl class="simple">
+<dt>2.1 <strong>Prepare the Reference PIMD Simulation:</strong></dt><dd><ul class="simple">
+<li><p>Set up the input files (<code class="docutils literal notranslate"><span class="pre">CONFIG</span></code>, <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code>, <code class="docutils literal notranslate"><span class="pre">FIELD</span></code>, <code class="docutils literal notranslate"><span class="pre">FQCMD</span></code>, <code class="docutils literal notranslate"><span class="pre">PAIR_&lt;i&gt;_POT.TABLE</span></code>) of a PIMD simulation for <strong>DLPOLY Quantum</strong>.</p></li>
+</ul>
+</dd>
+<dt>2.2 <strong>Run the PIMD Simulation:</strong></dt><dd><ul class="simple">
 <li><p>Execute the simulation to gather sufficient sampling of the reference system.</p></li>
-<li><p>Simulation conditions typically include:</p>
-<ul>
-<li><p>Canonical ensemble (NVT) with a quantum thermostat.</p></li>
-<li><p>Number of beads (<cite>n_beads</cite>) to achieve convergence in quantum effects.</p></li>
-<li><p>Adequate simulation time to ensure good sampling of the distributions.</p></li>
+<li><p>Simulation conditions typically include:
+- Canonical ensemble (NVT) with a quantum thermostat.
+- Number of beads (<cite>n_beads</cite>) to achieve convergence in quantum effects.
+- Adequate simulation time to ensure good sampling of the distributions.</p></li>
 </ul>
-</li>
-</ul>
-</li>
-<li><p><strong>Calculate Reference Distributions:</strong></p>
-<ul class="simple">
+</dd>
+<dt>2.3 <strong>Calculate Reference Distributions:</strong></dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Average_Intra.d</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Average_Angle.d</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Average_RDF.d</span></code></p></li>
 </ul>
-</li>
-</ol>
+</dd>
+</dl>
 </section>
-<section id="step-1-classical-simulations-iter0">
-<h2>Step 1: Classical Simulations (<code class="docutils literal notranslate"><span class="pre">iter0</span></code>)<a class="headerlink" href="#step-1-classical-simulations-iter0" title="Link to this heading"></a></h2>
-<p>After obtaining the reference distributions, an initial iteration, referred to as <strong>Iteration 0</strong>, (<code class="docutils literal notranslate"><span class="pre">iter0</span></code>) is performed under the following conditions:</p>
+<section id="step-3-classical-simulations-iter0">
+<h2>Step 3: Classical Simulations (<code class="docutils literal notranslate"><span class="pre">iter0</span></code>)<a class="headerlink" href="#step-3-classical-simulations-iter0" title="Link to this heading"></a></h2>
+<p>To begin the IBI process, an <strong>iteration 0</strong> is needed where the dynamics are performed classically using the base force field potential. This is equivalent to performing h-CMD with the correction potentials set to zero.</p>
+<p>Most of the setup work done for the PIMD reference simulations can be reused here:</p>
 <ul class="simple">
-<li><p>The correction potentials, <span class="math notranslate nohighlight">\(\Delta V_{\text{intra}}^{(0)}(r)\)</span> and <span class="math notranslate nohighlight">\(\Delta V_{\text{inter}}^{(0)}(r)\)</span>, are all set to <strong>zero</strong>.</p></li>
-<li><p>The system evolves using the classical potential, <span class="math notranslate nohighlight">\((V_{\text{cl}}(r))\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FQCMD</span></code> <strong>file</strong>: No changes are required.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PAIR_&lt;i&gt;_POT.TABLE</span></code> <strong>files</strong>: All values of the potential and force must be set to zero so that the dynamics are not altered from the base potential.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> <strong>file</strong>: This file remains very similar to the one used previously, with alter in integrator as:</p></li>
 </ul>
-<p>This step simulates classical dynamics without correction, providing a baseline, which serve as the starting point for subsequent iterations in the IBI process.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.
+integration<span class="w"> </span>velocity<span class="w"> </span>verlet
+ensemble<span class="w"> </span>nvt<span class="w"> </span>nhc<span class="w"> </span><span class="m">0</span>.05<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span>
+.
+.
+.
+fqcmd<span class="w">  </span><span class="nv">pot</span><span class="o">=</span><span class="m">15</span><span class="w">  </span><span class="nv">points</span><span class="o">=</span><span class="m">998</span><span class="w">  </span><span class="nv">outpts</span><span class="o">=</span><span class="m">480</span><span class="w">  </span><span class="nv">bnd</span><span class="o">=</span><span class="m">5</span><span class="w">  </span><span class="nv">ang</span><span class="o">=</span><span class="m">8</span><span class="w">  </span><span class="nv">wrt</span><span class="o">=</span><span class="m">100</span>
+.
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Changes made in <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> file:</p>
+<ul class="simple">
+<li><p>The integrator is changed to invoke the velocity Verlet algorithm.</p></li>
+<li><p>The NVT ensemble is maintained through a m-NHC thermostat.</p></li>
+<li><p>The simulation length can be shortened since RDFs are calculated using force sampling in classical dynamics.</p></li>
+</ul>
+</div>
+<p>This step performs classical dynamics without correction, providing a baseline, which serve as the starting point for subsequent iterations in the IBI process.</p>
 </section>
-<section id="step-2-ibi-iteration-workflow">
-<h2>Step 2: IBI Iteration Workflow<a class="headerlink" href="#step-2-ibi-iteration-workflow" title="Link to this heading"></a></h2>
-<p>Iterative Boltzmann Inversion (IBI) is used to refine effective interaction potentials by matching intra- and inter-molecular distribution fuctions.</p>
-<section id="step-2-1-ibi-iteration-setup">
-<h3>Step 2.1: IBI Iteration Setup:<a class="headerlink" href="#step-2-1-ibi-iteration-setup" title="Link to this heading"></a></h3>
+<section id="step-4-ibi-iteration-workflow">
+<h2>Step 4: IBI Iteration Workflow<a class="headerlink" href="#step-4-ibi-iteration-workflow" title="Link to this heading"></a></h2>
+<p>After the <strong>PIMD</strong> reference and <strong>iteration 0</strong> simulations are complete, the IBI process can begin to refine the effective ineraction potentials. Between each IBI iteration, the correction potentials are updated. This update is done using a separate Python script.</p>
+<p>A small portion of the script, designed to work on high-performance computing clusters with SLURM schedulers, requires modification to detail the system of interest.
+Most of the detail parallels the <code class="docutils literal notranslate"><span class="pre">FQCMD</span></code> and <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> files, with some additional information required.
+For example, the <code class="docutils literal notranslate"><span class="pre">pairtype</span></code> array specifies the non-bonded pairs for which the correction potential is calculated.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><cite>Snippet of the IBI code detailing the non-bonded pairs and intramolecular details for the Li-TFSI system.</cite></span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">npair</span><span class="o">=</span><span class="mi">15</span>
+<span class="n">cutoff</span><span class="o">=</span><span class="mf">10.0</span>
+<span class="n">nrdf</span><span class="o">=</span><span class="mi">480</span>
+<span class="n">pairtype</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C OW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;C HW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;N OW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;N HW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;O OW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;O HW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;F OW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;F HW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;S OW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;S HW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Li OW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Li HW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;OW OW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;OW HW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;HW HW&quot;</span>
+          <span class="p">]</span>
+<span class="n">nmols</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">nbonds</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">totbonds</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">nbonds</span><span class="p">)</span>
+<span class="n">bonds</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">[</span><span class="s2">&quot;harm&quot;</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;harm&quot;</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;harm&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;harm&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;quar&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="p">]</span>
+<span class="n">nangs</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">totangs</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">nangs</span><span class="p">)</span>
+<span class="n">angs</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">[</span><span class="s2">&quot;harm&quot;</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;harm&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;harm&quot;</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;harm&quot;</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;harm&quot;</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;harm&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;harm&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;harm&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+        <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pairtype</span></code>: Holds the list of non-bonded pairs for correction potential calculations. This list should match the TABLE files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nbonds</span></code>: Specifies the number of unique bonds in each molecule type.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nangs</span></code>: Specifies the number of unique angles in each molecule type.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bonds</span></code> and <code class="docutils literal notranslate"><span class="pre">angles</span></code>: Store information about each unique bond and angle type, including occurrences.</p></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To execute the IBI script, two additional files are required:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">OLD_FIELD</span></code>: The FIELD file from <strong>iteration 0</strong>, renamed to OLD_FIELD. This file contains bond and angle force field parameters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PREVIOUS_POTENTIAL.DAT</span></code>: Combines the correction potentials for all pairs from the previous iteration. For <strong>iteration 0</strong>, these values will be zero, but the file is still necessary.</p></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once the IBI script is executed, the following new files are created:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">NEW_FIELD</span></code>: Contains updated intramolecular force field parameters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NEW_POTENTIAL.DAT</span></code>: Includes updated intermolecular correction potentials.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PAIR_&lt;i&gt;_POT.TABLE</span></code> files: Generated for each pair type, containing new potentials and forces.</p></li>
+</ul>
+</div>
+<p>The updated files are used to run simulations for the next iteration. Starting with <strong>iteration 1</strong>, the dynamics are now classical dynamics under the correction potentials, mimicking PI-based dynamics. The process is repeated until the distribution functions sufficiently match those of the PIMD reference simulations.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A set of scripts is provided to automate the setup and execution of multiple IBI iterations, designed to work on high performance computing clusters with SLURM schedulers, with the jobs for later iterations requiring the previous ones to finish before running</p>
+</div>
+<p>Here is workflow of for single interation IBI fitting.</p>
+<section id="step-4-1-ibi-iteration-setup">
+<h3>Step 4.1: IBI Iteration Setup:<a class="headerlink" href="#step-4-1-ibi-iteration-setup" title="Link to this heading"></a></h3>
 <ol class="arabic">
 <li><p>Prepare the <code class="docutils literal notranslate"><span class="pre">iter-setup.sh</span></code> script to automate iteration setup: Each iteration runs 50 NVT simulations with 50 ps of equilibration and 50 ps of RDF gathering.</p></li>
 <li><p>Edit the simulation parameters in the <code class="docutils literal notranslate"><span class="pre">iterCONTROL</span></code> file. Example settings include temperature, time steps, and RDF parameters.</p></li>
@@ -147,8 +393,8 @@ to compute the reference intra- and inter-molecular distribution functions. Thes
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">i=&lt;current_iteration_number&gt;</span>
 </pre></div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">iter-setup.sh</span></code></span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">iter-setup.sh</span></code></span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="nb">let</span><span class="w"> </span><span class="nv">i</span><span class="o">=</span><span class="m">1</span>
 <span class="nb">let</span><span class="w"> </span><span class="nv">j</span><span class="o">=</span>i-1
@@ -196,8 +442,8 @@ cp<span class="w"> </span>../../iter<span class="si">${</span><span class="nv">j
 </li>
 </ol>
 </section>
-<section id="step-2-2-running-simulations">
-<h3>Step 2.2: Running Simulations<a class="headerlink" href="#step-2-2-running-simulations" title="Link to this heading"></a></h3>
+<section id="step-4-2-running-simulations">
+<h3>Step 4.2: Running Simulations<a class="headerlink" href="#step-4-2-running-simulations" title="Link to this heading"></a></h3>
 <p>Execute the <code class="docutils literal notranslate"><span class="pre">iter-setup.sh</span></code> script:</p>
 <blockquote>
 <div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>bash<span class="w"> </span>iter-setup.sh
@@ -206,13 +452,20 @@ cp<span class="w"> </span>../../iter<span class="si">${</span><span class="nv">j
 </div></blockquote>
 <p>This will start  50 classical-like dynamics under the correction potentials and generate RDFs for each trajectory. The <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> file looks like:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fqcmd<span class="w">  </span><span class="nv">pot</span><span class="o">=</span><span class="m">15</span><span class="w">  </span><span class="nv">points</span><span class="o">=</span><span class="m">998</span><span class="w">  </span><span class="nv">outpts</span><span class="o">=</span><span class="m">480</span><span class="w">  </span><span class="nv">bnd</span><span class="o">=</span><span class="m">5</span><span class="w">  </span><span class="nv">ang</span><span class="o">=</span><span class="m">8</span><span class="w">  </span><span class="nv">wrt</span><span class="o">=</span><span class="m">100</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.
+integration<span class="w"> </span>velocity<span class="w"> </span>verlet
+ensemble<span class="w"> </span>nvt<span class="w"> </span>nhc<span class="w"> </span><span class="m">0</span>.05<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span>
+.
+.
+.
+fqcmd<span class="w">  </span><span class="nv">pot</span><span class="o">=</span><span class="m">15</span><span class="w">  </span><span class="nv">points</span><span class="o">=</span><span class="m">998</span><span class="w">  </span><span class="nv">outpts</span><span class="o">=</span><span class="m">480</span><span class="w">  </span><span class="nv">bnd</span><span class="o">=</span><span class="m">5</span><span class="w">  </span><span class="nv">ang</span><span class="o">=</span><span class="m">8</span><span class="w">  </span><span class="nv">wrt</span><span class="o">=</span><span class="m">100</span>
+.
 </pre></div>
 </div>
 </div></blockquote>
 </section>
-<section id="step-2-3-averaging-rdfs">
-<h3>Step 2.3: Averaging RDFs<a class="headerlink" href="#step-2-3-averaging-rdfs" title="Link to this heading"></a></h3>
+<section id="step-4-3-averaging-rdfs">
+<h3>Step 4.3: Averaging RDFs<a class="headerlink" href="#step-4-3-averaging-rdfs" title="Link to this heading"></a></h3>
 <ol class="arabic">
 <li><p>Navigate to the simulation directory after the completion of simulation where the RDFs are stored:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>iter&lt;current_iteration_number&gt;/run
@@ -230,8 +483,8 @@ cp<span class="w"> </span>../../iter<span class="si">${</span><span class="nv">j
 </li>
 </ol>
 </section>
-<section id="step-2-4-updating-potentials">
-<h3>Step 2.4: Updating Potentials<a class="headerlink" href="#step-2-4-updating-potentials" title="Link to this heading"></a></h3>
+<section id="step-4-4-updating-potentials">
+<h3>Step 4.4: Updating Potentials<a class="headerlink" href="#step-4-4-updating-potentials" title="Link to this heading"></a></h3>
 <ol class="arabic">
 <li><p>Return to the iteration directory; Move up one directory to the main iteration forder:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>..
@@ -240,8 +493,8 @@ cp<span class="w"> </span>../../iter<span class="si">${</span><span class="nv">j
 </li>
 <li><p>Ensure the following required files exist.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">old_FIELD</span></code> (<em>FIELD file from the previous iteration</em>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Previous_Potential.dat</span></code> (<em>potential corrections from the previous iteration</em>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OLD_FIELD</span></code> (<em>FIELD file from the previous iteration</em>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PREVIOUS_POTENTIAL.DAT</span></code> (<em>potential corrections from the previous iteration</em>)</p></li>
 </ul>
 </li>
 <li><p>Run the IBI Python script to generate updated potentials:</p>
@@ -250,15 +503,15 @@ cp<span class="w"> </span>../../iter<span class="si">${</span><span class="nv">j
 </div>
 <p>The script generates the updated potential corrections:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">new_FIELD</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">New_Potential.dat</span></code></p></li>
-<li><p>A series of <code class="docutils literal notranslate"><span class="pre">*.table</span></code> files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NEW_FIELD</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NEW_POTENTIAL.DAT.dat</span></code></p></li>
+<li><p>A series of <code class="docutils literal notranslate"><span class="pre">PAIR_&lt;i&gt;_POT&gt;TABLE</span></code> files</p></li>
 </ul>
 </li>
 </ol>
 </section>
-<section id="step-2-5-evaluating-convergence">
-<h3>Step 2.5: Evaluating Convergence<a class="headerlink" href="#step-2-5-evaluating-convergence" title="Link to this heading"></a></h3>
+<section id="step-4-5-evaluating-convergence">
+<h3>Step 4.5: Evaluating Convergence<a class="headerlink" href="#step-4-5-evaluating-convergence" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Compare the RDFs of the reference and the currect iteration.</p></li>
 <li><p>If the RDFs do not match, repeat the process by starting a new iteration by updating the <code class="docutils literal notranslate"><span class="pre">iteration</span> <span class="pre">number</span></code> in <code class="docutils literal notranslate"><span class="pre">iter-setup.sh</span></code> and rerun the steps above.</p></li>
@@ -288,19 +541,19 @@ cp<span class="w"> </span>../../iter<span class="si">${</span><span class="nv">j
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">avgCONTROL</span></code></p></td>
 <td><p>Configuration file for averaging RDFs.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">old_FIELD</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">OLD_FIELD</span></code></p></td>
 <td><p>Field file from the previous iteration.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">new_FIELD</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NEW_FIELD</span></code></p></td>
 <td><p>Updated field file generated by the IBI script.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Previous_Potential.dat</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PREVIOUS_POTENTIAL.DAT</span></code></p></td>
 <td><p>Potential corrections from the previous iteration.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">New_Potential.dat</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NEW_POTENTIAL.DAT</span></code></p></td>
 <td><p>Updated potential corrections.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">*.table</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PAIR_&lt;i&gt;_POT.TABLE</span></code></p></td>
 <td><p>Individual tables representing updated potentials for specific interactions.</p></td>
 </tr>
 </tbody>
