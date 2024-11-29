@@ -95,13 +95,12 @@
 <h2>1. PIMD<a class="headerlink" href="#pimd" title="Link to this heading"></a></h2>
 <p>The PIMD Hamiltonian for <cite>n-beads</cite> replica with <cite>N</cite> atoms system is defined as</p>
 <div class="math notranslate nohighlight">
-\[H_n(\mathbf{x},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n} \left[ \frac{p_{i,\alpha}^2}{2m_i^{'}} +
-     \frac{1}{2}m_i\omega_n^2 \left( x_{i,\alpha}-x_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(x_{1,\alpha},\dots,x_{N,\alpha}),\]</div>
-<p>where <span class="math notranslate nohighlight">\(x_{i,\alpha}\)</span> and <span class="math notranslate nohighlight">\(p_{i,\alpha}\)</span> are the position and momentum of the <span class="math notranslate nohighlight">\(\alpha\)</span>-th bead of the <cite>i</cite>-th particle, <span class="math notranslate nohighlight">\(m_i^{'}\)</span> is the fictitious Parrinello-Rahman mass, and <span class="math notranslate nohighlight">\(\omega_n= \frac{\sqrt{n}}{\beta\hbar}\)</span>.</p>
+\[H_n(\mathbf{q},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n} \left[ \frac{p_{i,\alpha}^2}{2m_i^{'}} + \frac{1}{2}m_i\omega_n^2 \left( q_{i,\alpha}-q_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(q_{1,\alpha},\dots,q_{N,\alpha}),\]</div>
+<p>where <span class="math notranslate nohighlight">\(q_{i,\alpha}\)</span> and <span class="math notranslate nohighlight">\(p_{i,\alpha}\)</span> are the position and momentum of the <span class="math notranslate nohighlight">\(\alpha\)</span>-th bead of the <cite>i</cite>-th particle, <span class="math notranslate nohighlight">\(m_i^{'}\)</span> is the fictitious Parrinello-Rahman mass, and <span class="math notranslate nohighlight">\(\omega_n= \frac{\sqrt{n}}{\beta\hbar}\)</span>.</p>
 <p>The equations of motion (EOMs) derived from the PIMD Hamiltonian are:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\dot{p}_{i,\alpha} &amp;= -m_i \omega_n^2 (2x_{i,\alpha} - x_{i,\alpha-1} - x_{i,\alpha+1}) + \frac{1}{n} \nabla_{x_{i,\alpha}}V( \mathbf{x} ) \\
-\dot{x}_{i,\alpha} &amp;= \frac{p_{i,\alpha}}{m_i^{'}}.\end{split}\]</div>
+\[\begin{split}\dot{p}_{i,\alpha} &amp;= -m_i \omega_n^2 (2q_{i,\alpha} - q_{i,\alpha-1} - q_{i,\alpha+1}) + \frac{1}{n} \nabla_{q_{i,\alpha}}V( \mathbf{q} ) \\
+\dot{q}_{i,\alpha} &amp;= \frac{p_{i,\alpha}}{m_i^{'}}.\end{split}\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To ensure that the configurations sampled during the trajectories are part of the correct Boltzmann distribution, PIMD simulations are performed in the canonical ensemble by coupling the dynamics to a thermostat.</p>
@@ -112,8 +111,8 @@
 </div>
 <p>PIMD Hamiltonian in normal modes is</p>
 <div class="math notranslate nohighlight">
-\[H_{\mathrm{NM}} = \sum_{i=1}^N\sum_{k=0}^{n-1}\left[ \frac{\pi_{i,k}^2}{2m_{i}} + \frac{1}{2}m_{i} \omega_k^2 q_{i,k}^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(x_{1,\alpha}(\mathbf{q}),\dots,x_{N,\alpha}(\mathbf{q}))\]</div>
-<p>where <span class="math notranslate nohighlight">\(\omega_k = 2\omega_n\sin(k\pi/n)\)</span> are normal mode frequencies and <span class="math notranslate nohighlight">\(q_{i,k}\)</span> and <span class="math notranslate nohighlight">\(\pi_{i,k}\)</span> are the positions and momenta for the <cite>k</cite>-th normal mode of the <cite>i</cite>-th atom.</p>
+\[H_{\mathrm{NM}} = \sum_{i=1}^N\sum_{k=0}^{n-1}\left[ \frac{\tilde{p}_{i,k}^2}{2m_{i}^{'}} + \frac{1}{2}m_{i} \omega_k^2 \tilde{q}_{i,k}^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(q_{1,\alpha}(\mathbf{\tilde{q}}),\dots,q_{N,\alpha}(\mathbf{\tilde{q}}))\]</div>
+<p>where <span class="math notranslate nohighlight">\(\omega_k = 2\omega_n\sin(k\pi/n)\)</span> are normal mode frequencies and <span class="math notranslate nohighlight">\(\tilde{q}_{i,k}\)</span> and <span class="math notranslate nohighlight">\(\tilde{p}i_{i,k}\)</span> are the normal mode positions and momenta for the <cite>k</cite>-th normal mode of the <cite>i</cite>-th atom.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The transformation matrix for ring polymer normal modes are:</p>
@@ -131,40 +130,40 @@
 <li><p>The normal mode momenta at first half a time step:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\pi_{i,k}(t+\frac{\Delta t}{2}) = \pi_{i,k}(t) - \frac{\Delta t}{2}\frac{\partial U}{\partial q_{i,k}}\]</div>
+\[\tilde{p}_{i,k}(t+\frac{\Delta t}{2}) = \tilde{p}_{i,k}(t) - \frac{\Delta t}{2}\frac{\partial V}{\partial \tilde{q}_{i,k}}\]</div>
 <ul class="simple">
 <li><p>The free ring polymer evolution of the normal mode positions and momenta:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}&amp;\begin{pmatrix}
-     \pi_{i,k}(t+\Delta t) \\
-     q_{i,k}(t+\Delta t)
+     \tilde{p}_{i,k}(t+\Delta t) \\
+     \tilde{q}_{i,k}(t+\Delta t)
 \end{pmatrix} =
 &amp;\begin{pmatrix}
      \cos(\omega_k\Delta t) &amp; -{m_i}\omega_k\sin(\omega_k\Delta t) \\
      (m_i\omega_k)^{-1}\sin(\omega_k\Delta t) &amp; \cos(\omega_k\Delta t)
 \end{pmatrix}
 \begin{pmatrix}
-     \pi_{i,k}(t) \\
-     q_{i,k}(t)
+     \tilde{p}_{i,k}(t) \\
+     \tilde{q}_{i,k}(t)
 \end{pmatrix}.\end{split}\]</div>
 <ul class="simple">
 <li><p>The normal mode momenta at second half a time step:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\pi_{i,k}(t+\frac{\Delta t}{2}) = \pi_{i,k}(t) - \frac{\Delta t}{2}\frac{\partial U}{\partial q_{i,k}}\]</div>
+\[\tilde{p}_{i,k}(t+\frac{\Delta t}{2}) = \tilde{p}_{i,k}(t) - \frac{\Delta t}{2}\frac{\partial V}{\partial \tilde{q}_{i,k}}\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In between <strong>free ring polymer</strong> and <strong>second half time step  mementa</strong> calculation , the forces from the external potential are calculated based on the <strong>Cartesian positions</strong> and then converted into the normal mode basis, to reduce the overall number of transformations needed to be performed.</p>
 <div class="math notranslate nohighlight">
-\[\frac{\partial U}{\partial q_{i,k}} = \sum_{\alpha=1}^n C_{\alpha k}\frac{\partial U}{\partial x_{i,\alpha}}.\]</div>
+\[\frac{\partial V}{\partial \tilde{q}_{i,k}} = \sum_{\alpha=1}^n C_{\alpha k}\frac{\partial V}{\partial q_{i,\alpha}}.\]</div>
 </div>
 </section>
 <section id="rpmd">
 <h2>2. RPMD<a class="headerlink" href="#rpmd" title="Link to this heading"></a></h2>
 <p>The RPMD Hamiltonian is</p>
 <div class="math notranslate nohighlight">
-\[H_n(\mathbf{x},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n}\left[ \frac{p_{i,\alpha}^2}{2m^{(i)}_{n}} + \frac{1}{2}m^{(i)}_{n}\omega_n^2 \left( x_{i,\alpha}-x_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(x_{1,\alpha},\dots,x_{N,\alpha}),\]</div>
+\[H_n(\mathbf{q},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n}\left[ \frac{p_{i,\alpha}^2}{2m^{(i)}_{n}} + \frac{1}{2}m^{(i)}_{n}\omega_n^2 \left( q_{i,\alpha}-q_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(q_{1,\alpha},\dots,q_{N,\alpha}),\]</div>
 <p>with <span class="math notranslate nohighlight">\(m_n^{(i)}=\frac{m_i}{n}\)</span> and <span class="math notranslate nohighlight">\(\omega_n= \frac{n}{\beta\hbar}\)</span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -175,7 +174,7 @@
 <h2>3. T-RPMD<a class="headerlink" href="#t-rpmd" title="Link to this heading"></a></h2>
 <p>The T-RPMD Hamiltonian is</p>
 <div class="math notranslate nohighlight">
-\[H_n(\mathbf{x},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n}\left[ \frac{p_{i,\alpha}^2}{2m^{(i)}_{n}} + \frac{1}{2}m^{(i)}_{n}\omega_n^2 \left( x_{i,\alpha}-x_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(x_{1,\alpha},\dots,x_{N,\alpha}),\]</div>
+\[H_n(\mathbf{q},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n}\left[ \frac{p_{i,\alpha}^2}{2m^{(i)}_{n}} + \frac{1}{2}m^{(i)}_{n}\omega_n^2 \left( q_{i,\alpha}-q_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(q_{1,\alpha},\dots,q_{N,\alpha}),\]</div>
 <p>with <span class="math notranslate nohighlight">\(m_n^{(i)}=\frac{m_i}{n}\)</span> and <span class="math notranslate nohighlight">\(\omega_n= \frac{n}{\beta\hbar}\)</span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

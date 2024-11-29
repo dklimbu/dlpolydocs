@@ -11,16 +11,15 @@ Introduction
 The PIMD Hamiltonian for `n-beads` replica with `N` atoms system is defined as
 
 .. math::
-   H_n(\mathbf{x},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n} \left[ \frac{p_{i,\alpha}^2}{2m_i^{'}} +
-	\frac{1}{2}m_i\omega_n^2 \left( x_{i,\alpha}-x_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(x_{1,\alpha},\dots,x_{N,\alpha}),
-
-where :math:`x_{i,\alpha}` and :math:`p_{i,\alpha}` are the position and momentum of the :math:`\alpha`-th bead of the `i`-th particle, :math:`m_i^{'}` is the fictitious Parrinello-Rahman mass, and :math:`\omega_n= \frac{\sqrt{n}}{\beta\hbar}`.
+   H_n(\mathbf{q},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n} \left[ \frac{p_{i,\alpha}^2}{2m_i^{'}} + \frac{1}{2}m_i\omega_n^2 \left( q_{i,\alpha}-q_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(q_{1,\alpha},\dots,q_{N,\alpha}),
+     
+where :math:`q_{i,\alpha}` and :math:`p_{i,\alpha}` are the position and momentum of the :math:`\alpha`-th bead of the `i`-th particle, :math:`m_i^{'}` is the fictitious Parrinello-Rahman mass, and :math:`\omega_n= \frac{\sqrt{n}}{\beta\hbar}`.
 
 The equations of motion (EOMs) derived from the PIMD Hamiltonian are:
 
 .. math::
-   \dot{p}_{i,\alpha} &= -m_i \omega_n^2 (2x_{i,\alpha} - x_{i,\alpha-1} - x_{i,\alpha+1}) + \frac{1}{n} \nabla_{x_{i,\alpha}}V( \mathbf{x} ) \\
-   \dot{x}_{i,\alpha} &= \frac{p_{i,\alpha}}{m_i^{'}}.
+   \dot{p}_{i,\alpha} &= -m_i \omega_n^2 (2q_{i,\alpha} - q_{i,\alpha-1} - q_{i,\alpha+1}) + \frac{1}{n} \nabla_{q_{i,\alpha}}V( \mathbf{q} ) \\
+   \dot{q}_{i,\alpha} &= \frac{p_{i,\alpha}}{m_i^{'}}.
 
 .. note::
    To ensure that the configurations sampled during the trajectories are part of the correct Boltzmann distribution, PIMD simulations are performed in the canonical ensemble by coupling the dynamics to a thermostat.
@@ -31,9 +30,9 @@ The equations of motion (EOMs) derived from the PIMD Hamiltonian are:
 PIMD Hamiltonian in normal modes is
 
 .. math::
-   H_{\mathrm{NM}} = \sum_{i=1}^N\sum_{k=0}^{n-1}\left[ \frac{\pi_{i,k}^2}{2m_{i}} + \frac{1}{2}m_{i} \omega_k^2 q_{i,k}^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(x_{1,\alpha}(\mathbf{q}),\dots,x_{N,\alpha}(\mathbf{q}))
+   H_{\mathrm{NM}} = \sum_{i=1}^N\sum_{k=0}^{n-1}\left[ \frac{\tilde{p}_{i,k}^2}{2m_{i}^{'}} + \frac{1}{2}m_{i} \omega_k^2 \tilde{q}_{i,k}^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(q_{1,\alpha}(\mathbf{\tilde{q}}),\dots,q_{N,\alpha}(\mathbf{\tilde{q}}))
 
-where :math:`\omega_k = 2\omega_n\sin(k\pi/n)` are normal mode frequencies and :math:`q_{i,k}` and :math:`\pi_{i,k}` are the positions and momenta for the `k`-th normal mode of the `i`-th atom.
+where :math:`\omega_k = 2\omega_n\sin(k\pi/n)` are normal mode frequencies and :math:`\tilde{q}_{i,k}` and :math:`\tilde{p}i_{i,k}` are the normal mode positions and momenta for the `k`-th normal mode of the `i`-th atom.
 
 .. note::
    The transformation matrix for ring polymer normal modes are:
@@ -52,34 +51,34 @@ where :math:`\omega_k = 2\omega_n\sin(k\pi/n)` are normal mode frequencies and :
 - The normal mode momenta at first half a time step:
 
 .. math::
-   \pi_{i,k}(t+\frac{\Delta t}{2}) = \pi_{i,k}(t) - \frac{\Delta t}{2}\frac{\partial U}{\partial q_{i,k}}
+   \tilde{p}_{i,k}(t+\frac{\Delta t}{2}) = \tilde{p}_{i,k}(t) - \frac{\Delta t}{2}\frac{\partial V}{\partial \tilde{q}_{i,k}}
 
 - The free ring polymer evolution of the normal mode positions and momenta:
 
 .. math::
    &\begin{pmatrix}
-	\pi_{i,k}(t+\Delta t) \\
-	q_{i,k}(t+\Delta t)
+	\tilde{p}_{i,k}(t+\Delta t) \\
+	\tilde{q}_{i,k}(t+\Delta t)
    \end{pmatrix} = 
    &\begin{pmatrix}
 	\cos(\omega_k\Delta t) & -{m_i}\omega_k\sin(\omega_k\Delta t) \\
 	(m_i\omega_k)^{-1}\sin(\omega_k\Delta t) & \cos(\omega_k\Delta t)
    \end{pmatrix}
    \begin{pmatrix}
-	\pi_{i,k}(t) \\
-	q_{i,k}(t)
+	\tilde{p}_{i,k}(t) \\
+	\tilde{q}_{i,k}(t)
    \end{pmatrix}.
 
 - The normal mode momenta at second half a time step:
 
 .. math::
-   \pi_{i,k}(t+\frac{\Delta t}{2}) = \pi_{i,k}(t) - \frac{\Delta t}{2}\frac{\partial U}{\partial q_{i,k}}
+   \tilde{p}_{i,k}(t+\frac{\Delta t}{2}) = \tilde{p}_{i,k}(t) - \frac{\Delta t}{2}\frac{\partial V}{\partial \tilde{q}_{i,k}}
 
 .. note::
    In between **free ring polymer** and **second half time step  mementa** calculation , the forces from the external potential are calculated based on the **Cartesian positions** and then converted into the normal mode basis, to reduce the overall number of transformations needed to be performed. 
 
    .. math::
-      \frac{\partial U}{\partial q_{i,k}} = \sum_{\alpha=1}^n C_{\alpha k}\frac{\partial U}{\partial x_{i,\alpha}}.
+      \frac{\partial V}{\partial \tilde{q}_{i,k}} = \sum_{\alpha=1}^n C_{\alpha k}\frac{\partial V}{\partial q_{i,\alpha}}.
 
 
 2. RPMD
@@ -88,7 +87,7 @@ where :math:`\omega_k = 2\omega_n\sin(k\pi/n)` are normal mode frequencies and :
 The RPMD Hamiltonian is
 
 .. math::
-   H_n(\mathbf{x},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n}\left[ \frac{p_{i,\alpha}^2}{2m^{(i)}_{n}} + \frac{1}{2}m^{(i)}_{n}\omega_n^2 \left( x_{i,\alpha}-x_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(x_{1,\alpha},\dots,x_{N,\alpha}),
+   H_n(\mathbf{q},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n}\left[ \frac{p_{i,\alpha}^2}{2m^{(i)}_{n}} + \frac{1}{2}m^{(i)}_{n}\omega_n^2 \left( q_{i,\alpha}-q_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(q_{1,\alpha},\dots,q_{N,\alpha}),
 
 with :math:`m_n^{(i)}=\frac{m_i}{n}` and :math:`\omega_n= \frac{n}{\beta\hbar}`. 
 
@@ -101,7 +100,7 @@ with :math:`m_n^{(i)}=\frac{m_i}{n}` and :math:`\omega_n= \frac{n}{\beta\hbar}`.
 The T-RPMD Hamiltonian is
 
 .. math::
-   H_n(\mathbf{x},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n}\left[ \frac{p_{i,\alpha}^2}{2m^{(i)}_{n}} + \frac{1}{2}m^{(i)}_{n}\omega_n^2 \left( x_{i,\alpha}-x_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(x_{1,\alpha},\dots,x_{N,\alpha}),
+   H_n(\mathbf{q},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n}\left[ \frac{p_{i,\alpha}^2}{2m^{(i)}_{n}} + \frac{1}{2}m^{(i)}_{n}\omega_n^2 \left( q_{i,\alpha}-q_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(q_{1,\alpha},\dots,q_{N,\alpha}),
 
 with :math:`m_n^{(i)}=\frac{m_i}{n}` and :math:`\omega_n= \frac{n}{\beta\hbar}`. 
 
