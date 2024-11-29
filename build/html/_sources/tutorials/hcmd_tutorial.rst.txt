@@ -1,7 +1,7 @@
 h-CMD Tutorial
 ==============
 
-This tutorial provides step-by-step instructions on using Iterative Boltzmann Inversion (IBI) for **h-CMD** fitting in **DLPOLY Quantum** [#1]_.
+This tutorial provides step-by-step instructions on using Iterative Boltzmann Inversion (IBI) for **h-CMD** fitting in **DLPOLY Quantum**.
 
 Step 1: Setup h-CMD
 --------------------
@@ -281,4 +281,4 @@ This table describes the key files used during the IBI process and their roles.
 References
 ----------
 
-.. [#1] London, N.; Limbu, D. K.; Momeni, M. R.; Shakib, F. A. DL_POLY Quantum 2.0: A Modular General-Purpose Software for Advanced Path Integral Simulations. J. Chem. Phys. **2024**,160, 132501
+.. .. [#1] London, N.; Limbu, D. K.; Momeni, M. R.; Shakib, F. A. DL_POLY Quantum 2.0: A Modular General-Purpose Software for Advanced Path Integral Simulations. J. Chem. Phys. **2024**,160, 132501

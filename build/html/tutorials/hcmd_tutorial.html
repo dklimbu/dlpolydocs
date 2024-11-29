@@ -101,12 +101,12 @@
              
   <section id="h-cmd-tutorial">
 <h1>h-CMD Tutorial<a class="headerlink" href="#h-cmd-tutorial" title="Link to this heading"></a></h1>
-<p>This tutorial provides step-by-step instructions on using Iterative Boltzmann Inversion (IBI) for <strong>h-CMD</strong> fitting in <strong>DLPOLY Quantum</strong> <a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
+<p>This tutorial provides step-by-step instructions on using Iterative Boltzmann Inversion (IBI) for <strong>h-CMD</strong> fitting in <strong>DLPOLY Quantum</strong>.</p>
 <section id="step-1-setup-h-cmd">
 <h2>Step 1: Setup h-CMD<a class="headerlink" href="#step-1-setup-h-cmd" title="Link to this heading"></a></h2>
 <p>To perform h-CMD simulations, additional keywords are added to the <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> file. This <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> file is used for performing the initial PIMD reference calculations, where the keyword <code class="docutils literal notranslate"><span class="pre">pimd</span></code> indicates the integrator to be used.</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">CONTROL</span></code></span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">CONTROL</span></code></span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>h-CMD<span class="w"> </span>simulation<span class="w"> </span>of<span class="w"> </span>LiTFSI<span class="w"> </span>+<span class="w"> </span>q-TIP4P/F<span class="w"> </span>WATER
 
 pimd<span class="w"> </span>pile<span class="w"> </span><span class="nv">nbeads</span><span class="o">=</span><span class="m">32</span><span class="w"> </span><span class="nv">taut</span><span class="o">=</span><span class="m">0</span>.05
@@ -201,8 +201,8 @@ During PIMD reference simulations, potential and force values in the table are i
 <h3>1.4 FQCMD File<a class="headerlink" href="#fqcmd-file" title="Link to this heading"></a></h3>
 <p>An additional input file, the <code class="docutils literal notranslate"><span class="pre">FQCMD</span></code> file, is required for h-CMD simulations.
 For the Li-TFSI system, an example is shown here.</p>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">FQCMD</span></code></span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">FQCMD</span></code></span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">FQCMD params</span>
 <span class="go">TFSI</span>
 <span class="go">bonds 4</span>
@@ -307,8 +307,8 @@ fqcmd<span class="w">  </span><span class="nv">pot</span><span class="o">=</span
 <p>A small portion of the script, designed to work on high-performance computing clusters with SLURM schedulers, requires modification to detail the system of interest.
 Most of the detail parallels the <code class="docutils literal notranslate"><span class="pre">FQCMD</span></code> and <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> files, with some additional information required.
 For example, the <code class="docutils literal notranslate"><span class="pre">pairtype</span></code> array specifies the non-bonded pairs for which the correction potential is calculated.</p>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text"><cite>Snippet of the IBI code detailing the non-bonded pairs and intramolecular details for the Li-TFSI system.</cite></span><a class="headerlink" href="#id5" title="Link to this code"></a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><cite>Snippet of the IBI code detailing the non-bonded pairs and intramolecular details for the Li-TFSI system.</cite></span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">npair</span><span class="o">=</span><span class="mi">15</span>
 <span class="n">cutoff</span><span class="o">=</span><span class="mf">10.0</span>
 <span class="n">nrdf</span><span class="o">=</span><span class="mi">480</span>
@@ -394,8 +394,8 @@ For example, the <code class="docutils literal notranslate"><span class="pre">pa
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">i=&lt;current_iteration_number&gt;</span>
 </pre></div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">iter-setup.sh</span></code></span><a class="headerlink" href="#id6" title="Link to this code"></a></div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">iter-setup.sh</span></code></span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="nb">let</span><span class="w"> </span><span class="nv">i</span><span class="o">=</span><span class="m">1</span>
 <span class="nb">let</span><span class="w"> </span><span class="nv">j</span><span class="o">=</span>i-1
@@ -562,12 +562,6 @@ fqcmd<span class="w">  </span><span class="nv">pot</span><span class="o">=</span
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id2" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">2</a><span class="fn-bracket">]</span></span>
-<p>London, N.; Limbu, D. K.; Momeni, M. R.; Shakib, F. A. DL_POLY Quantum 2.0: A Modular General-Purpose Software for Advanced Path Integral Simulations. J. Chem. Phys. <strong>2024</strong>,160, 132501</p>
-</aside>
-</aside>
 </section>
 </section>
 

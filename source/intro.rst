@@ -47,7 +47,7 @@ where :math:`\omega_k = 2\omega_n\sin(k\pi/n)` are normal mode frequencies and :
 	\sqrt{2/n}\sin(2\pi \alpha k/n) & n/2 + 1 \leq k \leq n-1 
 	\end{cases}
 
-**The Velocity-Verlet algorith steps for ring polymer normal mode:**
+**The Velocity-Verlet algorithm steps for ring polymer normal mode:**
 
 - The normal mode momenta at first half a time step:
 
@@ -127,7 +127,10 @@ where, :math:`\sigma_k` is a scaling factor defined as
    \end{cases}
 
 .. note::
-   The choice of :math:`\Omega`, related to the adiabaticity parameter of the original PA-CMD, determines how adiabatically separated the centroid is from the other internal modes. One such choice is :math:`\Omega = \frac{n^{n/(n-1)}}{\beta\hbar}`
+   The choice of :math:`\Omega`, related to the adiabaticity parameter of the original PA-CMD, determines how adiabatically separated the centroid is from the other internal modes. One such choice is
+
+   .. math::
+      \Omega = \frac{n^{n/(n-1)}}{\beta\hbar}
 
 5. f-CMD
 --------
