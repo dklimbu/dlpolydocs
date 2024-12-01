@@ -13,8 +13,11 @@ DLPOLY Quantum documentation
 
 Welcome to **DLPOLY Quantum** documentation, a general purpose package for performing path integral-based dynamics simultions of condensed-phase systems.
 
+.. Check out the :doc:`install` section for further information, including how to :ref:`install <installation>` the project. 
+Goto :doc:`tutorials/hcmd_tutorial` section for detailed simulation tutorials on h-CMD.
 
-Check out the :doc:`install` section for further information, including how to :ref:`install <installation>` the project. Goto :doc:`tutorials/hcmd_tutorial` section for detailed simulation tutorials on h-CMD.
+.. note::
+   This website in under active development...
 
 
 .. toctree::
@@ -22,7 +25,7 @@ Check out the :doc:`install` section for further information, including how to :
    :caption: Getting Started:
 
    intro
-   install
+..   install
 
 .. toctree::
    :maxdepth: 2
@@ -30,7 +33,4 @@ Check out the :doc:`install` section for further information, including how to :
 
    tutorials/hcmd_tutorial
    tutorials/ir_tutorial
-
-.. note::
-   This website in under active development...
 

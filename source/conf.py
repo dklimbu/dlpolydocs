@@ -15,12 +15,13 @@ release = '2.0'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-        'sphinx_rtd_theme'
+        'sphinx_rtd_theme',
+#        'sphinxcontrib.bibtex'
         ]
 
 templates_path = ['_templates']
+#bibtex_bibfiles = ['ref.bib']
 exclude_patterns = []
-
 
 
 # -- Options for HTML output -------------------------------------------------

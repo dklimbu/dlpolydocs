@@ -1,7 +1,11 @@
+.. raw:: latex
+
+   \setcounter{footnote}{0}  % Reset footnote numbering
+
 h-CMD Tutorial
 ==============
 
-This tutorial provides step-by-step instructions on using Iterative Boltzmann Inversion (IBI) for **h-CMD** fitting in **DLPOLY Quantum**.
+This tutorial provides step-by-step instructions on using Iterative Boltzmann Inversion (IBI) for **h-CMD** [#hcmd]_ fitting in **DLPOLY Quantum**.
 
 Step 1: Setup h-CMD
 --------------------
@@ -277,8 +281,7 @@ This table describes the key files used during the IBI process and their roles.
    * - ``PAIR_<i>_POT.TABLE``
      - Individual tables representing updated potentials for specific interactions.
 
-
 References
 ----------
+.. [#hcmd] Limbu, D. K.; London, N.; Faruque, M. O.; Momeni, M. R. h-CMD: An Efficient Hybrid Fast Centroid and Quasi-Centroid Molecular Dynamics Method for the Simulation of Vibrational Spectra. **2024**; DOI: 10.48550/arXiv.2411.08065
 
-.. .. [#1] London, N.; Limbu, D. K.; Momeni, M. R.; Shakib, F. A. DL_POLY Quantum 2.0: A Modular General-Purpose Software for Advanced Path Integral Simulations. J. Chem. Phys. **2024**,160, 132501
