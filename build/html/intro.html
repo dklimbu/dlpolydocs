@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; DLPOLY Quantum 2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+    <link rel="shortcut icon" href="_static/logo.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=60dbed4a"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="h-CMD Tutorial" href="tutorials/hcmd_tutorial.html" />
+    <link rel="prev" title="DLPOLY Quantum documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DLPOLY Quantum
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pimd">1. PIMD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rpmd">2. RPMD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#t-rpmd">3. T-RPMD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pa-cmd">4. PA-CMD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#f-qcmd">5. f-QCMD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ibi-process"><strong>IBI Process</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#regularized-ibi"><strong>Regularized IBI</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#f-cmd">6. f-CMD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#f-cmd-with-ibi"><strong>f-CMD with IBI</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#h-cmd">7. h-CMD</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/hcmd_tutorial.html">h-CMD Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/ir_tutorial.html">IR Spectra Calculation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DLPOLY Quantum</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/intro.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
+<p id="intro"><strong>DLPOLY Quantum</strong> is a general purpose package for performing path integral-based dynamics simultions of condensed-phase systems.</p>
+<section id="pimd">
+<h2>1. PIMD<a class="headerlink" href="#pimd" title="Link to this heading"></a></h2>
+<p>The PIMD <span id="id1">[<a class="reference internal" href="reference.html#id2" title="Richard P. Feynman, Albert R. Hibbs, and Daniel F. Styer. Quantum Mechanics and Path Integrals. Courier Corporation, 2010. ISBN 978-0-486-47722-0.">1</a>]</span> Hamiltonian for <cite>n-beads</cite> replica with <cite>N</cite> atoms system is defined as</p>
+<div class="math notranslate nohighlight">
+\[H_n(\mathbf{q},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n} \left[ \frac{p_{i,\alpha}^2}{2m_i^{'}} + \frac{1}{2}m_i\omega_n^2 \left( q_{i,\alpha}-q_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(q_{1,\alpha},\dots,q_{N,\alpha}),\]</div>
+<p>where <span class="math notranslate nohighlight">\(q_{i,\alpha}\)</span> and <span class="math notranslate nohighlight">\(p_{i,\alpha}\)</span> are the position and momentum of the <span class="math notranslate nohighlight">\(\alpha\)</span>-th bead of the <cite>i</cite>-th particle, <span class="math notranslate nohighlight">\(m_i^{'}\)</span> is the fictitious Parrinello-Rahman mass, and <span class="math notranslate nohighlight">\(\omega_n= \frac{\sqrt{n}}{\beta\hbar}\)</span>.</p>
+<p>The equations of motion (EOMs) derived from the PIMD Hamiltonian are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\dot{p}_{i,\alpha} &amp;= -m_i \omega_n^2 (2q_{i,\alpha} - q_{i,\alpha-1} - q_{i,\alpha+1}) + \frac{1}{n} \nabla_{q_{i,\alpha}}V( \mathbf{q} ) \\
+\dot{q}_{i,\alpha} &amp;= \frac{p_{i,\alpha}}{m_i^{'}}.\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To ensure that the configurations sampled during the trajectories are part of the correct Boltzmann distribution, PIMD simulations are performed in the canonical ensemble by coupling the dynamics to a thermostat.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Straightforward implementation of the PIMD Hamiltonian and its EOMs in Cartesian coordinates is complicated by the harmonic coupling between neighboring beads. Most implementations of the method transform the Hamiltonian into a different coordinate system which diagonalizes the couplings, like staging variables or normal mode coordinate.</p>
+</div>
+<p>PIMD Hamiltonian in normal modes is</p>
+<div class="math notranslate nohighlight">
+\[H_{\mathrm{NM}} = \sum_{i=1}^N\sum_{k=0}^{n-1}\left[ \frac{\tilde{p}_{i,k}^2}{2m_{i}^{'}} + \frac{1}{2}m_{i} \omega_k^2 \tilde{q}_{i,k}^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(q_{1,\alpha}(\mathbf{\tilde{q}}),\dots,q_{N,\alpha}(\mathbf{\tilde{q}}))\]</div>
+<p>where <span class="math notranslate nohighlight">\(\omega_k = 2\omega_n\sin(k\pi/n)\)</span> are normal mode frequencies and <span class="math notranslate nohighlight">\(\tilde{q}_{i,k}\)</span> and <span class="math notranslate nohighlight">\(\tilde{p}i_{i,k}\)</span> are the normal mode positions and momenta for the <cite>k</cite>-th normal mode of the <cite>i</cite>-th atom.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The transformation matrix for ring polymer normal modes are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}C_{\alpha k} =
+  \begin{cases}
+  \sqrt{1/n} &amp; k = 0\\
+  \sqrt{2/n}\cos(2\pi \alpha k/n) &amp; 1 \leq k \leq n/2 - 1\\
+  \sqrt{1/n}(-1)^\alpha &amp; k = n/2 \\
+  \sqrt{2/n}\sin(2\pi \alpha k/n) &amp; n/2 + 1 \leq k \leq n-1
+  \end{cases}\end{split}\]</div>
+</div>
+<p><strong>The Velocity-Verlet algorithm steps for ring polymer normal mode:</strong></p>
+<ul class="simple">
+<li><p>The normal mode momenta at first half a time step:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\tilde{p}_{i,k} \leftarrow \tilde{p}_{i,k} - \frac{\Delta t}{2}\frac{\partial V}{\partial \tilde{q}_{i,k}}\]</div>
+<ul class="simple">
+<li><p>The free ring polymer evolution of the normal mode positions and momenta:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp;\begin{pmatrix}
+     \tilde{p}_{i,k} \\
+     \tilde{q}_{i,k}
+\end{pmatrix} \leftarrow
+&amp;\begin{pmatrix}
+     \cos(\omega_k\Delta t) &amp; -{m_i}\omega_k\sin(\omega_k\Delta t) \\
+     (m_i\omega_k)^{-1}\sin(\omega_k\Delta t) &amp; \cos(\omega_k\Delta t)
+\end{pmatrix}
+\begin{pmatrix}
+     \tilde{p}_{i,k} \\
+     \tilde{q}_{i,k}
+\end{pmatrix}.\end{split}\]</div>
+<ul class="simple">
+<li><p>The normal mode momenta at second half a time step:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\tilde{p}_{i,k} \leftarrow \tilde{p}_{i,k} - \frac{\Delta t}{2}\frac{\partial V}{\partial \tilde{q}_{i,k}}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In between <strong>free ring polymer</strong> and <strong>second half time step  mementa</strong> calculation , the forces from the external potential are calculated based on the <strong>Cartesian positions</strong> and then converted into the normal mode basis, to reduce the overall number of transformations needed to be performed.</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial V}{\partial \tilde{q}_{i,k}} = \sum_{\alpha=1}^n C_{\alpha k}\frac{\partial V}{\partial q_{i,\alpha}}.\]</div>
+</div>
+</section>
+<section id="rpmd">
+<h2>2. RPMD<a class="headerlink" href="#rpmd" title="Link to this heading"></a></h2>
+<p>The RPMD <span id="id2">[<a class="reference internal" href="reference.html#id3" title="Ian R. Craig and David E. Manolopoulos. Quantum statistics and classical mechanics: Real time correlation functions from ring polymer molecular dynamics. J. Chem. Phys., 121(8):3368–3373, 2004. doi:10.1063/1.1777575.">2</a>]</span> Hamiltonian is</p>
+<div class="math notranslate nohighlight">
+\[H_n(\mathbf{q},\mathbf{p}) = \sum_{i=1}^N\sum_{\alpha=1}^{n}\left[ \frac{p_{i,\alpha}^2}{2m^{(i)}_{n}} + \frac{1}{2}m^{(i)}_{n}\omega_n^2 \left( q_{i,\alpha}-q_{i,\alpha-1} \right)^2\right] + \frac{1}{n}\sum_{\alpha=1}^{n}V(q_{1,\alpha},\dots,q_{N,\alpha}),\]</div>
+<p>with <span class="math notranslate nohighlight">\(m_n^{(i)}=\frac{m_i}{n}\)</span> and <span class="math notranslate nohighlight">\(\omega_n= \frac{n}{\beta\hbar}\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The fictitious mass in the kinetic energy term must be equal to the physical mass, with the additional factor of <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span> multiplying the physical mass coming from sampling the initial momenta at the physical temperature, <span class="math notranslate nohighlight">\(\beta\)</span>, instead of a higher temperature, <span class="math notranslate nohighlight">\(\beta_n= \frac{\beta}{n}\)</span>, as is often done in RPMD simulations.</p>
+</div>
+</section>
+<section id="t-rpmd">
+<h2>3. T-RPMD<a class="headerlink" href="#t-rpmd" title="Link to this heading"></a></h2>
+<p>Thermostatted RPMD (T-RPMD) <span id="id3">[<a class="reference internal" href="reference.html#id4" title="Mariana Rossi, Michele Ceriotti, and David E. Manolopoulos. How to remove the spurious resonances from ring polymer molecular dynamics. J. Chem. Phys., 140(23):234116, 2014. doi:10.1063/1.4883861.">3</a>]</span> was introduced as a method to calculate vibrational spectra using RPMD while avoiding the resonance problem. This approach incorporates thermostats into the dynamics, effectively mitigating spurious peaks that arise in standard RPMD simulations.</p>
+<p><code class="docutils literal notranslate"><span class="pre">T-RPMD</span> <span class="pre">Hamiltonian</span> <span class="pre">is</span> <span class="pre">the</span> <span class="pre">same</span> <span class="pre">as</span> <span class="pre">that</span> <span class="pre">for</span> <span class="pre">standard</span> <span class="pre">RPMD</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In T-RPMD, the internal modes of the ring polymer are thermostatted using the PILE thermostat. The centroid, however, is allowed to evolve freely without the influence of a thermostat. This separation ensures that the internal modes are regulated while preserving the dynamics of the centroid, which is essential for capturing vibrational features.</p>
+</div>
+</section>
+<section id="pa-cmd">
+<h2>4. PA-CMD<a class="headerlink" href="#pa-cmd" title="Link to this heading"></a></h2>
+<p>The PA-CMD <span id="id4">[<a class="reference internal" href="reference.html#id5" title="Tyler D. Hone, Peter J. Rossky, and Gregory A. Voth. A comparative study of imaginary time path integral based methods for quantum dynamics. J. Chem. Phys., 124(15):154103, 2006. doi:10.1063/1.2186636.">4</a>]</span> effective Hamiltonian in terms of the free ring polymer normal modes is:</p>
+<div class="math notranslate nohighlight">
+\[ H_{\mathrm{PA-CMD}}=\sum_{i=1}^{N}\sum_{k=0}^{n-1}
+\left[ \frac{\tilde{p}_{i,k}^2}{2\sigma_k^2m_n^{(i)}} + \frac{1}{2}m_n^{(i)}\omega_k^2\tilde{q}_{i,k}^2\right]\]</div>
+<p>where, <span class="math notranslate nohighlight">\(\sigma_k\)</span> is a scaling factor defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\sigma_k =\begin{cases}
+1, \quad k=0 \\
+\omega_k/\Omega, \quad k\neq0
+\end{cases}\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The choice of <span class="math notranslate nohighlight">\(\Omega\)</span>, related to the adiabaticity parameter of the original PA-CMD, determines how adiabatically separated the centroid is from the other internal modes. One such choice is</p>
+<div class="math notranslate nohighlight">
+\[\Omega = \frac{n^{n/(n-1)}}{\beta\hbar}\]</div>
+</div>
+</section>
+<section id="f-qcmd">
+<h2>5. f-QCMD<a class="headerlink" href="#f-qcmd" title="Link to this heading"></a></h2>
+<p>f-QCMD <span id="id5">[<a class="reference internal" href="reference.html#id7" title="Theo Fletcher, Andrew Zhu, Joseph E. Lawrence, and David E. Manolopoulos. Fast quasi-centroid molecular dynamics. J. Chem. Phys., 155(23):231101, 2021. doi:10.1063/5.0076704.">5</a>]</span>, inspired by the fast implementation of CMD, uses
+PIMD simulations as a reference to construct a corrective potential that
+mimics the effective mean-field potential from adiabatic-QCMD <span id="id6">[<a class="reference internal" href="reference.html#id6" title="George Trenins, Michael J. Willatt, and Stuart C. Althorpe. Path-integral dynamics of water using curvilinear centroids. J. Chem. Phys., 151(5):054109, 2019. doi:10.1063/1.5100587.">6</a>]</span>. This effective potential has the form:</p>
+<div class="math notranslate nohighlight">
+\[V_{\mathrm{qc}}(\mathbf{r}) = V_{\mathrm{cl}}(\mathbf{r}) + \Delta V_{\mathrm{intra}}(\mathbf{r}) + \Delta V_{\mathrm{inter}}(\mathbf{r}),\]</div>
+<p>where <span class="math notranslate nohighlight">\(V_{\mathrm{cl}}(\mathbf{r})\)</span> is the base, classical potential, and <span class="math notranslate nohighlight">\(\Delta V_{\mathrm{intra}}(\mathbf{r})\)</span>
+and <span class="math notranslate nohighlight">\(\Delta V_{\mathrm{inter}}(\mathbf{r})\)</span> are the correction terms for intra- and inter-molecular interactions, respectively.
+The correction potentials are determined using the iterative Boltzmann inversion (IBI) method <span id="id7">[<a class="reference internal" href="reference.html#id8" title="Dirk Reith, Mathias Pütz, and Florian Müller-Plathe. Deriving effective mesoscale potentials from atomistic simulations. J. Comput. Chem., 24(13):1624–1636, 2003. doi:10.1002/jcc.10307.">7</a>]</span> with a set of distribution functions of two types:
+(1) intra-molecular bond and angle distribution functions and
+(2) inter-molecular radial distribution functions (RDFs).</p>
+<section id="ibi-process">
+<h3><strong>IBI Process</strong><a class="headerlink" href="#ibi-process" title="Link to this heading"></a></h3>
+<p>The IBI process involves a series of steps to generate the corrective potentials:</p>
+<ol class="arabic">
+<li><p><strong>PIMD Reference Simulations:</strong>
+Distributions are obtained from PIMD simulations to serve as a reference for the effective potential.</p></li>
+<li><p><strong>Iteration Zero:</strong>
+At iteration zero, <span class="math notranslate nohighlight">\(\Delta V_{\mathrm{intra}}^{(0)}(\mathbf{r})\)</span> and <span class="math notranslate nohighlight">\(\Delta V_{\mathrm{inter}}^{(0)}(\mathbf{r})\)</span>
+are set to zero, equivalent to classical dynamics under the base potential <span class="math notranslate nohighlight">\(V_{\mathrm{cl}}(\mathbf{r})\)</span>.</p></li>
+<li><p><strong>Subsequent Iterations:</strong>
+For each iteration <span class="math notranslate nohighlight">\(i\)</span>, the distribution functions
+(<span class="math notranslate nohighlight">\(\rho_{R}^{(i)}(r)\)</span>, <span class="math notranslate nohighlight">\(\rho_{\Theta}^{(i)}(\theta)\)</span>, and <span class="math notranslate nohighlight">\(g_{\mathrm{XY}}^{(i)}(r)\)</span>) are calculated as classical averages under the effective potential. The corrections for the next iteration are updated using the equations:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+\Delta V_R^{(i+1)}(r) &amp;= \Delta V_R^{(i)}(r) - \frac{1}{\beta} \ln\left( \frac{\rho_R^{\mathrm{exact}}(r)}{\rho_R^{(i)}(r)} \right), \\
+\Delta V_\Theta^{(i+1)}(\theta) &amp;= \Delta V_\Theta^{(i)}(\theta) - \frac{1}{\beta} \ln\left( \frac{\rho_\Theta^{\mathrm{exact}}(\theta)}{\rho_\Theta^{(i)}(\theta)} \right), \\
+\Delta V_{\mathrm{XY}}^{(i+1)}(r) &amp;= \Delta V_{\mathrm{XY}}^{(i)}(r) - \frac{1}{\beta} \ln\left( \frac{g_{\mathrm{XY}}^{\mathrm{exact}}(r)}{g_{\mathrm{XY}}^{(i)}(r)} \right),
+\end{split}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta = 1 / k_\mathrm{b}T\)</span> and the exact distributions (<span class="math notranslate nohighlight">\(\rho_R^{\mathrm{exact}}(r)\)</span>,
+<span class="math notranslate nohighlight">\(\rho_\Theta^{\mathrm{exact}}(\theta)\)</span>, and <span class="math notranslate nohighlight">\(g_{\mathrm{XY}}^{\mathrm{exact}}(r)\)</span>) are calculated from
+the PIMD simulations using histogram binning.</p>
+</li>
+</ol>
+</section>
+<section id="regularized-ibi">
+<h3><strong>Regularized IBI</strong><a class="headerlink" href="#regularized-ibi" title="Link to this heading"></a></h3>
+<p>To address statistical errors in RDFs when values are small, the regularized form of IBI is used to stabilize the process near convergence. <span id="id8">[<a class="reference internal" href="reference.html#id9" title="Joseph E. Lawrence, Annina Z. Lieberherr, Theo Fletcher, and David E. Manolopoulos. Fast Quasi-Centroid Molecular Dynamics for Water and Ice. J. Phys. Chem. B, 127(42):9172–9180, 2023. doi:10.1021/acs.jpcb.3c05028.">8</a>]</span>
+The updates to the inter-molecular corrections are modified as:</p>
+<div class="math notranslate nohighlight">
+\[\Delta V_{\mathrm{XY}}^{(i+1)}(r) = \Delta V_{\mathrm{XY}}^{(i)}(r) - \frac{1}{\beta} \log\left( \frac{g_{\mathrm{XY}}^{\mathrm{exact}}(r) + \varepsilon G_{\mathrm{XY}}}{g_{\mathrm{XY}}^{(i)}(r) + \varepsilon G_{\mathrm{XY}}} \right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\varepsilon\)</span> is a positive scalar parameter, and <span class="math notranslate nohighlight">\(G_{\mathrm{XY}}\)</span> is the maximum value of the RDFs,
+allowing the same <span class="math notranslate nohighlight">\(\varepsilon\)</span> for all RDFs.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Regularization IBI is particularly useful for ensuring stability when the IBI process approaches convergence, as small statistical errors can dominate the iterations.</p>
+</div>
+</section>
+</section>
+<section id="f-cmd">
+<h2>6. f-CMD<a class="headerlink" href="#f-cmd" title="Link to this heading"></a></h2>
+<p>A “fast” version of CMD (f-CMD) <span id="id9">[<a class="reference internal" href="reference.html#id10" title="Tyler D. Hone, Sergei Izvekov, and Gregory A. Voth. Fast centroid molecular dynamics: A force-matching approach for the predetermination of the effective centroid forces. J. Chem. Phys., 122(5):054105, 2005. doi:10.1063/1.1836731.">9</a>]</span> was introduced by Voth and coworkers as an effort to reduce the computational cost of CMD over the years.
+This method involves adding a small correction to the classical forcefield to produce a potential consistent
+with the effective mean-field potential of the PI simulations.</p>
+<p>So, the effective potential being replicated in f-CMD originates
+from the RP centroids and the corrective potentials are
+obtained using a force-matching method.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The force-matching procedure, while effective, is less convenient than the IBI methodology used in f-QCMD. It involves solving a single-value decomposition problem for a large number of equations. For example, a system of 216 water molecules generates a set of 1944 equations for atomic forces for each configuration in a trajectory.</p>
+</div>
+<section id="f-cmd-with-ibi">
+<h3><strong>f-CMD with IBI</strong><a class="headerlink" href="#f-cmd-with-ibi" title="Link to this heading"></a></h3>
+<p>A version of f-CMD <span id="id10">[<a class="reference internal" href="reference.html#id12" title="B Sutherland. Inclusion of nuclear quantum effects in thermal conductivity prediction from path integral techniques. PhD thesis, University of Oxford, 2022. doi:10.5287/ora-vmbzkjmd9.">10</a>, <a class="reference internal" href="reference.html#id11" title="Dil K. Limbu, Nathan London, Md Omar Faruque, and Mohammad R. Momeni. H-CMD: An efficient hybrid fast centroid and quasi-centroid molecular dynamics method for the simulation of vibrational spectra. 2024. arXiv:2411.08065.">11</a>]</span> was introduced
+where the corrective potentials are obtained using the IBI method.
+This approach follows the same framework as f-QCMD with key differences
+in the definition and calculation of reference distributions:</p>
+<ul class="simple">
+<li><p>The Quasi-Centroid (QC) values are taken as the Cartesian centroids when calculating RDFs.</p></li>
+<li><p>For intra-molecular distributions, bond and angle values are determined from polar coordinates of Cartesian centroids instead of bead-averaged values.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The IBI process is used to generate the corrective potentials consistent with the CMD effective mean-field potential. This allows for classical-like simulations with CMD NQEs incorporated.</p>
+</div>
+</section>
+</section>
+<section id="h-cmd">
+<h2>7. h-CMD<a class="headerlink" href="#h-cmd" title="Link to this heading"></a></h2>
+<p>While f-QCMD is capable of creating vibrational spectra with accuracy comparable to AQCMD simulations, it faces challenges when applied to complex systems, particularly those containing large, complex molecules or materials. These limitations arise from the application of Eckart-like conditions using a rotation matrix, which requires an initial set of QC coordinates. For large molecules, transitioning from curvilinear coordinates to QCs can be challenging to generalize.</p>
+<p>To address this issue and extend f-QCMD to more complex systems, the hybrid CMD (h-CMD) <span id="id11">[<a class="reference internal" href="reference.html#id11" title="Dil K. Limbu, Nathan London, Md Omar Faruque, and Mohammad R. Momeni. H-CMD: An efficient hybrid fast centroid and quasi-centroid molecular dynamics method for the simulation of vibrational spectra. 2024. arXiv:2411.08065.">11</a>]</span> method was introduced. The core idea of h-CMD is to selectively apply the f-QCMD method only to those degrees of freedom that are significantly affected by the curvature problem, while treating the remaining degrees of freedom with f-CMD.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The h-CMD method provides a feasible solution for systems where defining curvilinear coordinates for the entire system is impractical. To ensure consistency, the h-CMD method employs the same form of correction potentials as f-QCMD for f-CMD simulations, with the correction potentials determined using the iterative Boltzmann inversion (IBI) method instead of force matching. The primary difference between f-QCMD and f-CMD calculations within the h-CMD scheme is that the reference distribution functions for f-CMD molecules are derived using Cartesian centroids instead of QCs</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The h-CMD method offers:</p>
+<ol class="arabic simple">
+<li><p><strong>Flexibility</strong>: Only a subset of degrees of freedom are treated at the f-QCMD level, reducing computational complexity.</p></li>
+<li><p><strong>Generalization</strong>: Enables the application of CMD methods to systems where defining QC coordinates for all components is infeasible.</p></li>
+<li><p><strong>Accuracy</strong>: Maintains the high accuracy of vibrational spectra for large complex hetergeneous systems.</p></li>
+</ol>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="DLPOLY Quantum documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorials/hcmd_tutorial.html" class="btn btn-neutral float-right" title="h-CMD Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, DLPOLY Quantum Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
