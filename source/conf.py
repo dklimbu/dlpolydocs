@@ -16,11 +16,11 @@ release = '2.0'
 
 extensions = [
         'sphinx_rtd_theme',
-#        'sphinxcontrib.bibtex'
+        'sphinxcontrib.bibtex'
         ]
 
 templates_path = ['_templates']
-#bibtex_bibfiles = ['ref.bib']
+bibtex_bibfiles = ['ref.bib']
 exclude_patterns = []
 
 

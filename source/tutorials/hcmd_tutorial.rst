@@ -1,11 +1,6 @@
-.. raw:: latex
-
-   \setcounter{footnote}{0}  % Reset footnote numbering
-
 h-CMD Tutorial
 ==============
-
-This tutorial provides step-by-step instructions on using Iterative Boltzmann Inversion (IBI) for **h-CMD** [#hcmd]_ fitting in **DLPOLY Quantum**.
+This tutorial offers detailed, step-by-step guidance for performing **h-CMD** simulations :cite:`hcmd` with IBI fitting using **DL_POLY Quantum 2.1**. Follow these instructions to efficiently set up and execute your h-CMD simulation for accurate IR spectra calculations.
 
 Step 1: Setup h-CMD
 --------------------
@@ -102,19 +97,19 @@ Most of the setup work done for the PIMD reference simulations can be reused her
 .. code-block:: bash
       
    . 
-   integration velocity verlet
+   integrator velocity verlet
    ensemble nvt nhc 0.05 1 3
    .
    .
    .
-   fqcmd  pot=15  points=998  outpts=480  bnd=5  ang=8  wrt=100
+   fqcmd  pot=15  points=998  outpts=480  bnd=5  rmax=2.5  ang=8  wrt=100
    .
 
 .. note::
     Changes made in ``CONTROL`` file:
   
     - The integrator is changed to invoke the velocity Verlet algorithm.
-    - The NVT ensemble is maintained through a m-NHC thermostat.
+    - The NVT ensemble is maintained through a NHC thermostat.
     - The simulation length can be shortened since RDFs are calculated using force sampling in classical dynamics.
 
 This step performs classical dynamics without correction, providing a baseline, which serve as the starting point for subsequent iterations in the IBI process.
@@ -195,12 +190,12 @@ This will start  50 classical-like dynamics under the correction potentials and 
    .. code-block:: bash
       
       . 
-      integration velocity verlet
+      integrator velocity verlet
       ensemble nvt nhc 0.05 1 3
       .
       .
       .
-      fqcmd  pot=15  points=998  outpts=480  bnd=5  ang=8  wrt=100
+      fqcmd  pot=15  points=998  outpts=480  bnd=5  rmax=2.5  ang=8  wrt=100
       .
 
 Step 4.3: Averaging RDFs
@@ -253,6 +248,12 @@ Step 4.5: Evaluating Convergence
 - If the RDFs do not match, repeat the process by starting a new iteration by updating the ``iteration number`` in ``iter-setup.sh`` and rerun the steps above.
 
 
+.. note::
+   :strong:`Production Simulations` 
+   
+   After the correction potentials have converged, these corrected potentials are utilized for subsequent simulations of the same system. The ``CONTROL`` files for these simulations should retain the same options under the ``fqcmd`` keyword as in earlier simulations. However, the value of the ``wrt`` option can be increased to minimize computation time, as the distribution functions—though no longer needed—are still being calculated.
+
+
 Key Files and Their Roles
 -------------------------
 
@@ -280,8 +281,4 @@ This table describes the key files used during the IBI process and their roles.
      - Updated potential corrections.
    * - ``PAIR_<i>_POT.TABLE``
      - Individual tables representing updated potentials for specific interactions.
-
-References
-----------
-.. [#hcmd] Limbu, D. K.; London, N.; Faruque, M. O.; Momeni, M. R. h-CMD: An Efficient Hybrid Fast Centroid and Quasi-Centroid Molecular Dynamics Method for the Simulation of Vibrational Spectra. **2024**; DOI: 10.48550/arXiv.2411.08065
 

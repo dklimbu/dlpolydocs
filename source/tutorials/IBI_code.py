@@ -1,5 +1,5 @@
 npair=15
-cutoff=10.0
+cutoff=8.5
 nrdf=480
 pairtype=["C OW",
         "C HW",

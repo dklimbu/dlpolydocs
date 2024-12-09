@@ -1,9 +1,7 @@
-h-CMD simulation of LiTFSI + q-TIP4P/F WATER
+# h-CMD of LiTFSI + q-TIP4P/F WATER PIMD Reference
 
+# pimd simulation with 32 beads
 pimd pile nbeads=32 taut=0.05
-
-# integration velocity verlet
-# ensemble nvt nhc 0.05 1 3
 
 # invoking qTIP4P/f water potential model
 qtip4pf
@@ -16,8 +14,8 @@ timestep 0.0002
 
 # SIMULATION & EQUILIBRATION LENGTH
 equil	       250000
-steps          500000
-trajectory     251000 500 1
+steps          1000000
+trajectory     251000 5000 1
 
 # OUTPUT
 print          5000
@@ -26,7 +24,7 @@ print          5000
 fqcmd pot=15 points=850 outpts=480 bnd=5 rmax=2.5 ang=8 wrt=100
 
 # STATISTICS
-stats          100
+stats          1000
 
 # SYSTEM CUTOFFS FOR ELECTROSTATICS AND NON-BONDED
 cutoff         8.5
@@ -39,3 +37,4 @@ job time       9999999.0
 close time     20.0
 
 finish
+
