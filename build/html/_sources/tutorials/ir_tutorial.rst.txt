@@ -15,7 +15,7 @@ Steps to Calculate Spectra for h-CMD
 
    - Once the sampling is done, update the ``i`` variable in the ``config-setup.sh`` script to the desired iteration and run the script.  
      This will create the **dynamics** trajectory as well as the **config** directory and copy the sampling ``HISTORY`` file into it.  
-     Use the ``rpmdConfig`` program to generate the ``CONFIG`` files from the ``HISTORY`` file.
+     Use the ``config`` program to generate the ``CONFIG`` files from the ``HISTORY`` file.
 
 3. **Run Dynamics Trajectories**
 

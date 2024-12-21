@@ -26,7 +26,7 @@ Goto :doc:`tutorials/hcmd_tutorial` section for detailed simulation tutorials on
    :caption: Getting Started:
 
    intro
-..   install
+   install
 
 .. toctree::
    :maxdepth: 2
