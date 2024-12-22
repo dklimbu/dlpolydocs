@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Introduction &mdash; DLPOLY Quantum 2.0 documentation</title>
+  <title>Introduction &mdash; DL_POLY Quantum 2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -22,7 +22,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installation" href="install.html" />
-    <link rel="prev" title="DLPOLY Quantum documentation" href="index.html" /> 
+    <link rel="prev" title="DL_POLY Quantum documentation" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,7 +34,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            DLPOLY Quantum
+            DL_POLY Quantum
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -81,7 +81,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">DLPOLY Quantum</a>
+          <a href="index.html">DL_POLY Quantum</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -101,7 +101,7 @@
              
   <section id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
-<p id="intro"><strong>DLPOLY Quantum</strong> is a general purpose package for performing path integral-based dynamics simultions of condensed-phase systems.</p>
+<p id="intro"><strong>DL_POLY Quantum</strong> is a general purpose package for performing path integral-based dynamics simultions of condensed-phase systems.</p>
 <section id="pimd">
 <h2>1. PIMD<a class="headerlink" href="#pimd" title="Link to this heading"></a></h2>
 <p>The PIMD <span id="id1">[<a class="reference internal" href="reference.html#id2" title="Richard P. Feynman, Albert R. Hibbs, and Daniel F. Styer. Quantum Mechanics and Path Integrals. Courier Corporation, 2010. ISBN 978-0-486-47722-0.">1</a>]</span> Hamiltonian for <cite>n-beads</cite> replica with <cite>N</cite> atoms system is defined as</p>
@@ -273,7 +273,7 @@ obtained using a force-matching method.</p>
 </div>
 <section id="f-cmd-with-ibi">
 <h3><strong>f-CMD with IBI</strong><a class="headerlink" href="#f-cmd-with-ibi" title="Link to this heading"></a></h3>
-<p>A version of f-CMD <span id="id10">[<a class="reference internal" href="reference.html#id12" title="B Sutherland. Inclusion of nuclear quantum effects in thermal conductivity prediction from path integral techniques. PhD thesis, University of Oxford, 2022. doi:10.5287/ora-vmbzkjmd9.">10</a>, <a class="reference internal" href="reference.html#id11" title="Dil K. Limbu, Nathan London, Md Omar Faruque, and Mohammad R. Momeni. H-CMD: An efficient hybrid fast centroid and quasi-centroid molecular dynamics method for the simulation of vibrational spectra. 2024. arXiv:2411.08065.">11</a>]</span> was introduced
+<p>A version of f-CMD <span id="id10">[<a class="reference internal" href="reference.html#id12" title="B Sutherland. Inclusion of nuclear quantum effects in thermal conductivity prediction from path integral techniques. PhD thesis, University of Oxford, 2022. doi:10.5287/ora-vmbzkjmd9.">10</a>, <a class="reference internal" href="reference.html#id11" title="Dil K. Limbu, Nathan London, Md Omar Faruque, and Mohammad R. Momeni. H-CMD: An efficient hybrid fast centroid and quasi-centroid molecular dynamics method for the simulation of vibrational spectra. J. Chem. Phys., 2024. doi:10.1063/5.0248115.">11</a>]</span> was introduced
 where the corrective potentials are obtained using the IBI method.
 This approach follows the same framework as f-QCMD with key differences
 in the definition and calculation of reference distributions:</p>
@@ -290,7 +290,7 @@ in the definition and calculation of reference distributions:</p>
 <section id="h-cmd">
 <h2>7. h-CMD<a class="headerlink" href="#h-cmd" title="Link to this heading"></a></h2>
 <p>While f-QCMD is capable of creating vibrational spectra with accuracy comparable to AQCMD simulations, it faces challenges when applied to complex systems, particularly those containing large, complex molecules or materials. These limitations arise from the application of Eckart-like conditions using a rotation matrix, which requires an initial set of QC coordinates. For large molecules, transitioning from curvilinear coordinates to QCs can be challenging to generalize.</p>
-<p>To address this issue and extend f-QCMD to more complex systems, the hybrid CMD (h-CMD) <span id="id11">[<a class="reference internal" href="reference.html#id11" title="Dil K. Limbu, Nathan London, Md Omar Faruque, and Mohammad R. Momeni. H-CMD: An efficient hybrid fast centroid and quasi-centroid molecular dynamics method for the simulation of vibrational spectra. 2024. arXiv:2411.08065.">11</a>]</span> method was introduced. The core idea of h-CMD is to selectively apply the f-QCMD method only to those degrees of freedom that are significantly affected by the curvature problem, while treating the remaining degrees of freedom with f-CMD.</p>
+<p>To address this issue and extend f-QCMD to more complex systems, the hybrid CMD (h-CMD) <span id="id11">[<a class="reference internal" href="reference.html#id11" title="Dil K. Limbu, Nathan London, Md Omar Faruque, and Mohammad R. Momeni. H-CMD: An efficient hybrid fast centroid and quasi-centroid molecular dynamics method for the simulation of vibrational spectra. J. Chem. Phys., 2024. doi:10.1063/5.0248115.">11</a>]</span> method was introduced. The core idea of h-CMD is to selectively apply the f-QCMD method only to those degrees of freedom that are significantly affected by the curvature problem, while treating the remaining degrees of freedom with f-CMD.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The h-CMD method provides a feasible solution for systems where defining curvilinear coordinates for the entire system is impractical. To ensure consistency, the h-CMD method employs the same form of correction potentials as f-QCMD for f-CMD simulations, with the correction potentials determined using the iterative Boltzmann inversion (IBI) method instead of force matching. The primary difference between f-QCMD and f-CMD calculations within the h-CMD scheme is that the reference distribution functions for f-CMD molecules are derived using Cartesian centroids instead of QCs</p>
@@ -311,14 +311,14 @@ in the definition and calculation of reference distributions:</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="DLPOLY Quantum documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="DL_POLY Quantum documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, DLPOLY Quantum Team.</p>
+    <p>&#169; Copyright 2024, DL_POLY Quantum Team.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

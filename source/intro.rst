@@ -3,7 +3,7 @@ Introduction
 
 .. _intro:
 
-**DLPOLY Quantum** is a general purpose package for performing path integral-based dynamics simultions of condensed-phase systems.
+**DL_POLY Quantum** is a general purpose package for performing path integral-based dynamics simultions of condensed-phase systems.
 
 1. PIMD
 -------

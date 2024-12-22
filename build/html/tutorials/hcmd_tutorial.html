@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>h-CMD Tutorial &mdash; DLPOLY Quantum 2.0 documentation</title>
+  <title>h-CMD Tutorial &mdash; DL_POLY Quantum 2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -33,7 +33,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            DLPOLY Quantum
+            DL_POLY Quantum
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -84,7 +84,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">DLPOLY Quantum</a>
+          <a href="../index.html">DL_POLY Quantum</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -104,7 +104,7 @@
              
   <section id="h-cmd-tutorial">
 <h1>h-CMD Tutorial<a class="headerlink" href="#h-cmd-tutorial" title="Link to this heading"></a></h1>
-<p>This tutorial offers detailed, step-by-step guidance for performing <strong>h-CMD</strong> simulations <span id="id1">[<a class="reference internal" href="../reference.html#id11" title="Dil K. Limbu, Nathan London, Md Omar Faruque, and Mohammad R. Momeni. H-CMD: An efficient hybrid fast centroid and quasi-centroid molecular dynamics method for the simulation of vibrational spectra. 2024. arXiv:2411.08065.">11</a>]</span> with IBI fitting using <strong>DL_POLY Quantum 2.1</strong>. Follow these instructions to efficiently set up and execute your h-CMD simulation for accurate IR spectra calculations.</p>
+<p>This tutorial offers detailed, step-by-step guidance for performing <strong>h-CMD</strong> simulations <span id="id1">[<a class="reference internal" href="../reference.html#id11" title="Dil K. Limbu, Nathan London, Md Omar Faruque, and Mohammad R. Momeni. H-CMD: An efficient hybrid fast centroid and quasi-centroid molecular dynamics method for the simulation of vibrational spectra. J. Chem. Phys., 2024. doi:10.1063/5.0248115.">11</a>]</span> with IBI fitting using <strong>DL_POLY Quantum 2.1</strong>. Follow these instructions to efficiently set up and execute your h-CMD simulation for accurate IR spectra calculations.</p>
 <section id="step-1-setup-h-cmd">
 <h2>Step 1: Setup h-CMD<a class="headerlink" href="#step-1-setup-h-cmd" title="Link to this heading"></a></h2>
 <p>To perform h-CMD simulations, additional keywords are added to the <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> file. This <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> file is used for performing the initial PIMD reference calculations, where the keyword <code class="docutils literal notranslate"><span class="pre">pimd</span></code> indicates the integrator to be used.</p>
@@ -253,7 +253,7 @@ For the Li-TFSI system, an example is shown here.</p>
 </div>
 <dl class="simple">
 <dt>2.1 <strong>Prepare the Reference PIMD Simulation:</strong></dt><dd><ul class="simple">
-<li><p>Set up the input files (<code class="docutils literal notranslate"><span class="pre">CONFIG</span></code>, <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code>, <code class="docutils literal notranslate"><span class="pre">FIELD</span></code>, <code class="docutils literal notranslate"><span class="pre">FQCMD</span></code>, <code class="docutils literal notranslate"><span class="pre">PAIR_&lt;i&gt;_POT.TABLE</span></code>) of a PIMD simulation for <strong>DLPOLY Quantum</strong>.</p></li>
+<li><p>Set up the input files (<code class="docutils literal notranslate"><span class="pre">CONFIG</span></code>, <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code>, <code class="docutils literal notranslate"><span class="pre">FIELD</span></code>, <code class="docutils literal notranslate"><span class="pre">FQCMD</span></code>, <code class="docutils literal notranslate"><span class="pre">PAIR_&lt;i&gt;_POT.TABLE</span></code>) of a PIMD simulation for <strong>DL_POLY Quantum</strong>.</p></li>
 </ul>
 </dd>
 <dt>2.2 <strong>Run the PIMD Simulation:</strong></dt><dd><ul class="simple">
@@ -579,7 +579,7 @@ fqcmd<span class="w">  </span><span class="nv">pot</span><span class="o">=</span
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, DLPOLY Quantum Team.</p>
+    <p>&#169; Copyright 2024, DL_POLY Quantum Team.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

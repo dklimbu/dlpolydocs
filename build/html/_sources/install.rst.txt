@@ -4,12 +4,12 @@ Installation
 .. _installation:
 
 
-To install **DLPOLY Quantum**, follow the steps below:
+To install **DL_POLY Quantum**, follow the steps below:
 
 Step 1: Clone the Source Code
 -----------------------------
 
-   Clone the **DLPOLY Quantum** source code from the ``fqcmd`` branch on GitHub repository:
+   Clone the **DL_POLY Quantum 2.1** source code from the  GitHub repository:
 
    .. code-block:: console
 
@@ -27,7 +27,7 @@ Step 2: Navigate to the Source Directory
 Step 3: Compile the Executable
 ------------------------------
 
-   Compile the **DLPOLY Quantum** executable using the ``make`` command:
+   Compile the **DL_POLY Quantum** executable using the ``make`` command:
 
    .. code-block:: console
 
@@ -36,16 +36,16 @@ Step 3: Compile the Executable
 Step 4: Verify the Executable
 -----------------------------
 
-   If the compilation is successful, the ``DLPOLY.X`` executable will be generated in the `execute` directory. To verify, run:
+   If the compilation is successful, the ``DL_POLY.X`` executable will be generated in the `execute` directory. To verify, run:
 
    .. code-block:: bash
 
-     $ ls ../execute/DLPOLY.X
+     $ ls ../execute/DL_POLY.X
 
 
 
 Usage
 -----
-After completing the installation, you can use ``DLPOLY.X`` to perform PI as well as Classical MD simulations.
+After completing the installation, you can use ``DL_POLY.X`` to perform PI as well as Classical MD simulations.
 
 

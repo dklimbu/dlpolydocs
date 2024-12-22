@@ -6,8 +6,8 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'DLPOLY Quantum'
-copyright = '2024, DLPOLY Quantum Team'
+project = 'DL_POLY Quantum'
+copyright = '2024, DL_POLY Quantum Team'
 author = 'Dil Limbu'
 release = '2.0'
 
@@ -22,7 +22,6 @@ extensions = [
 templates_path = ['_templates']
 bibtex_bibfiles = ['ref.bib']
 exclude_patterns = []
-
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

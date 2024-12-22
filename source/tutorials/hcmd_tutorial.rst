@@ -70,7 +70,7 @@ For h-CMD simulation, at first, a **Reference PIMD Simulation** must be carried 
    It is often advantageous to perform multiple PIMD reference simulations starting from different initial configurations. This approach improves the statistical accuracy of the calculated distribution functions.
 
 2.1 **Prepare the Reference PIMD Simulation:**
-   - Set up the input files (``CONFIG``, ``CONTROL``, ``FIELD``, ``FQCMD``, ``PAIR_<i>_POT.TABLE``) of a PIMD simulation for **DLPOLY Quantum**.
+   - Set up the input files (``CONFIG``, ``CONTROL``, ``FIELD``, ``FQCMD``, ``PAIR_<i>_POT.TABLE``) of a PIMD simulation for **DL_POLY Quantum**.
 
 2.2 **Run the PIMD Simulation:**
    - Execute the simulation to gather sufficient sampling of the reference system. 
