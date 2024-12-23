@@ -110,45 +110,45 @@
 <p>To perform h-CMD simulations, additional keywords are added to the <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> file. This <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> file is used for performing the initial PIMD reference calculations, where the keyword <code class="docutils literal notranslate"><span class="pre">pimd</span></code> indicates the integrator to be used.</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">CONTROL</span></code></span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># h-CMD of LiTFSI + q-TIP4P/F WATER PIMD Reference</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>h-CMD<span class="w"> </span>of<span class="w"> </span>LiTFSI<span class="w"> </span>+<span class="w"> </span>q-TIP4P/F<span class="w"> </span>WATER<span class="w"> </span>PIMD<span class="w"> </span>Reference
 
-<span class="c1"># pimd simulation with 32 beads</span>
-pimd<span class="w"> </span>pile<span class="w"> </span><span class="nv">nbeads</span><span class="o">=</span><span class="m">32</span><span class="w"> </span><span class="nv">taut</span><span class="o">=</span><span class="m">0</span>.05
+<span class="gp"># </span>pimd<span class="w"> </span>simulation<span class="w"> </span>with<span class="w"> </span><span class="m">32</span><span class="w"> </span>beads
+<span class="go">pimd pile nbeads=32 taut=0.05</span>
 
-<span class="c1"># invoking qTIP4P/f water potential model</span>
-qtip4pf
+<span class="gp"># </span>invoking<span class="w"> </span>qTIP4P/f<span class="w"> </span>water<span class="w"> </span>potential<span class="w"> </span>model
+<span class="go">qtip4pf</span>
 
-<span class="c1"># SYSTEM TARGETED TEMPERATURE (K) </span>
-temperature<span class="w">  </span><span class="m">298</span>.0
+<span class="gp"># </span>SYSTEM<span class="w"> </span>TARGETED<span class="w"> </span>TEMPERATURE<span class="w"> </span><span class="o">(</span>K<span class="o">)</span><span class="w"> </span>
+<span class="go">temperature  298.0</span>
 
-<span class="c1"># INTEGRATION TIMESTEP (ps)</span>
-timestep<span class="w"> </span><span class="m">0</span>.0002
+<span class="gp"># </span>INTEGRATION<span class="w"> </span>TIMESTEP<span class="w"> </span><span class="o">(</span>ps<span class="o">)</span>
+<span class="go">timestep 0.0002</span>
 
-<span class="c1"># SIMULATION &amp; EQUILIBRATION LENGTH</span>
-equil<span class="w">	       </span><span class="m">250000</span>
-steps<span class="w">          </span><span class="m">1000000</span>
-trajectory<span class="w">     </span><span class="m">251000</span><span class="w"> </span><span class="m">5000</span><span class="w"> </span><span class="m">1</span>
+<span class="gp"># </span>SIMULATION<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>EQUILIBRATION<span class="w"> </span>LENGTH
+<span class="go">equil	       250000</span>
+<span class="go">steps          1000000</span>
+<span class="go">trajectory     251000 5000 1</span>
 
-<span class="c1"># OUTPUT</span>
-print<span class="w">          </span><span class="m">5000</span>
+<span class="gp"># </span>OUTPUT
+<span class="go">print          5000</span>
 
-<span class="c1"># h-CMD Options</span>
-fqcmd<span class="w"> </span><span class="nv">pot</span><span class="o">=</span><span class="m">15</span><span class="w"> </span><span class="nv">points</span><span class="o">=</span><span class="m">850</span><span class="w"> </span><span class="nv">outpts</span><span class="o">=</span><span class="m">480</span><span class="w"> </span><span class="nv">bnd</span><span class="o">=</span><span class="m">5</span><span class="w"> </span><span class="nv">rmax</span><span class="o">=</span><span class="m">2</span>.5<span class="w"> </span><span class="nv">ang</span><span class="o">=</span><span class="m">8</span><span class="w"> </span><span class="nv">wrt</span><span class="o">=</span><span class="m">100</span>
+<span class="gp"># </span>h-CMD<span class="w"> </span>Options
+<span class="go">fqcmd pot=15 points=998 outpts=480 bnd=5 rmax=2.5 ang=8 wrt=100</span>
 
-<span class="c1"># STATISTICS</span>
-stats<span class="w">          </span><span class="m">1000</span>
+<span class="gp"># </span>STATISTICS
+<span class="go">stats          1000</span>
 
-<span class="c1"># SYSTEM CUTOFFS FOR ELECTROSTATICS AND NON-BONDED</span>
-cutoff<span class="w">         </span><span class="m">8</span>.5
-rvdw<span class="w">           </span><span class="m">8</span>.5
-ewald<span class="w"> </span>precision<span class="w">   </span><span class="m">1</span>.0e-6
-delr<span class="w"> </span>width<span class="w">      </span><span class="m">0</span>.5<span class="w">	</span>!<span class="w"> </span><span class="k">for</span><span class="w"> </span>Verlet<span class="w"> </span>list
+<span class="gp"># </span>SYSTEM<span class="w"> </span>CUTOFFS<span class="w"> </span>FOR<span class="w"> </span>ELECTROSTATICS<span class="w"> </span>AND<span class="w"> </span>NON-BONDED
+<span class="go">cutoff         10.0</span>
+<span class="go">rvdw           10.0</span>
+<span class="go">ewald precision   1.0e-6</span>
+<span class="go">delr width      0.5	! for Verlet list</span>
 
-<span class="c1"># EXECUTION TIME</span>
-job<span class="w"> </span><span class="nb">time</span><span class="w">       </span><span class="m">9999999</span>.0
-close<span class="w"> </span><span class="nb">time</span><span class="w">     </span><span class="m">20</span>.0
+<span class="gp"># </span>EXECUTION<span class="w"> </span>TIME
+<span class="go">job time       9999999.0</span>
+<span class="go">close time     20.0</span>
 
-finish
+<span class="go">finish</span>
 </pre></div>
 </div>
 </div>
@@ -281,14 +281,14 @@ For the Li-TFSI system, an example is shown here.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">PAIR_&lt;i&gt;_POT.TABLE</span></code> <strong>files</strong>: All values of the potential and force must be set to zero so that the dynamics are not altered from the base potential.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> <strong>file</strong>: This file remains very similar to the one used previously, with alter in integrator as:</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.
-integrator<span class="w"> </span>velocity<span class="w"> </span>verlet
-ensemble<span class="w"> </span>nvt<span class="w"> </span>nhc<span class="w"> </span><span class="m">0</span>.05<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span>
-.
-.
-.
-fqcmd<span class="w">  </span><span class="nv">pot</span><span class="o">=</span><span class="m">15</span><span class="w">  </span><span class="nv">points</span><span class="o">=</span><span class="m">998</span><span class="w">  </span><span class="nv">outpts</span><span class="o">=</span><span class="m">480</span><span class="w">  </span><span class="nv">bnd</span><span class="o">=</span><span class="m">5</span><span class="w">  </span><span class="nv">rmax</span><span class="o">=</span><span class="m">2</span>.5<span class="w">  </span><span class="nv">ang</span><span class="o">=</span><span class="m">8</span><span class="w">  </span><span class="nv">wrt</span><span class="o">=</span><span class="m">100</span>
-.
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">.</span>
+<span class="go">integrator velocity verlet</span>
+<span class="go">ensemble nvt nhc 0.05 1 3</span>
+<span class="go">.</span>
+<span class="go">.</span>
+<span class="go">.</span>
+<span class="go">fqcmd  pot=15  points=998  outpts=480  bnd=5  rmax=2.5  ang=8  wrt=100</span>
+<span class="go">.</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -311,7 +311,7 @@ For example, the <code class="docutils literal notranslate"><span class="pre">pa
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text"><cite>Snippet of the IBI code detailing the non-bonded pairs and intramolecular details for the Li-TFSI system.</cite></span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">npair</span><span class="o">=</span><span class="mi">15</span>
-<span class="n">cutoff</span><span class="o">=</span><span class="mf">8.5</span>
+<span class="n">cutoff</span><span class="o">=</span><span class="mf">10.0</span>
 <span class="n">nrdf</span><span class="o">=</span><span class="mi">480</span>
 <span class="n">pairtype</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C OW&quot;</span><span class="p">,</span>
         <span class="s2">&quot;C HW&quot;</span><span class="p">,</span>

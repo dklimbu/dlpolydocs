@@ -1,9 +1,7 @@
+# h-CMD of LiTFSI + q-TIP4P/F WATER PIMD Reference
 
-
-# h-CMD of LiTFSI + q-TIP4P/F WATER Iterations
-
-integrator velocity verlet
-ensemble nvt nhc 0.05 1 3
+# pimd simulation with 32 beads
+pimd pile nbeads=32 taut=0.05
 
 # invoking qTIP4P/f water potential model
 qtip4pf
@@ -16,7 +14,7 @@ timestep 0.0002
 
 # SIMULATION & EQUILIBRATION LENGTH
 equil	       250000
-steps          500000
+steps          1000000
 trajectory     251000 5000 1
 
 # OUTPUT

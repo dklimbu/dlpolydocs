@@ -6,8 +6,8 @@ Step 1: Setup h-CMD
 --------------------
 To perform h-CMD simulations, additional keywords are added to the ``CONTROL`` file. This ``CONTROL`` file is used for performing the initial PIMD reference calculations, where the keyword ``pimd`` indicates the integrator to be used.
 
-.. literalinclude:: CONTROL
-   :language: bash
+.. literalinclude:: refCONTROL
+   :language: console
    :caption: ``CONTROL``
 
 1.1 h-CMD Specification
@@ -94,7 +94,7 @@ Most of the setup work done for the PIMD reference simulations can be reused her
 - ``PAIR_<i>_POT.TABLE`` **files**: All values of the potential and force must be set to zero so that the dynamics are not altered from the base potential.
 - ``CONTROL`` **file**: This file remains very similar to the one used previously, with alter in integrator as:
   
-.. code-block:: bash
+.. code-block:: console
       
    . 
    integrator velocity verlet
