@@ -18,7 +18,7 @@ where :math:`q_{i,\alpha}` and :math:`p_{i,\alpha}` are the position and momentu
 The equations of motion (EOMs) derived from the PIMD Hamiltonian are:
 
 .. math::
-   \dot{p}_{i,\alpha} &= -m_i \omega_n^2 (2q_{i,\alpha} - q_{i,\alpha-1} - q_{i,\alpha+1}) + \frac{1}{n} \nabla_{q_{i,\alpha}}V( \mathbf{q} ) \\
+   \dot{p}_{i,\alpha} &= -m_i \omega_n^2 (2q_{i,\alpha} - q_{i,\alpha-1} - q_{i,\alpha+1}) - \frac{1}{n} \nabla_{q_{i,\alpha}}V( \mathbf{q} ) \\
    \dot{q}_{i,\alpha} &= \frac{p_{i,\alpha}}{m_i^{'}}.
 
 .. note::

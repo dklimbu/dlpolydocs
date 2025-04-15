@@ -6,7 +6,7 @@
 DL_POLY Quantum documentation
 =============================
 
-.. figure:: _static/logo.png
+ .. figure:: _static/logo.png
    :scale: 80 %
    :align: center
    :alt: DL_POLY Quantum

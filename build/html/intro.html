@@ -110,7 +110,7 @@
 <p>where <span class="math notranslate nohighlight">\(q_{i,\alpha}\)</span> and <span class="math notranslate nohighlight">\(p_{i,\alpha}\)</span> are the position and momentum of the <span class="math notranslate nohighlight">\(\alpha\)</span>-th bead of the <cite>i</cite>-th particle, <span class="math notranslate nohighlight">\(m_i^{'}\)</span> is the fictitious Parrinello-Rahman mass, and <span class="math notranslate nohighlight">\(\omega_n= \frac{\sqrt{n}}{\beta\hbar}\)</span>.</p>
 <p>The equations of motion (EOMs) derived from the PIMD Hamiltonian are:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\dot{p}_{i,\alpha} &amp;= -m_i \omega_n^2 (2q_{i,\alpha} - q_{i,\alpha-1} - q_{i,\alpha+1}) + \frac{1}{n} \nabla_{q_{i,\alpha}}V( \mathbf{q} ) \\
+\[\begin{split}\dot{p}_{i,\alpha} &amp;= -m_i \omega_n^2 (2q_{i,\alpha} - q_{i,\alpha-1} - q_{i,\alpha+1}) - \frac{1}{n} \nabla_{q_{i,\alpha}}V( \mathbf{q} ) \\
 \dot{q}_{i,\alpha} &amp;= \frac{p_{i,\alpha}}{m_i^{'}}.\end{split}\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
